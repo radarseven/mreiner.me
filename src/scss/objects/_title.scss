@@ -1,0 +1,25 @@
+.title {
+  &.-center {
+    text-align: center;
+  }
+  &.-hero {
+    &.-underline:after {
+      margin-top: 0 !important;
+    }
+  }
+  &.-underline {
+    &:after {
+      background-color: color(darkBlue);
+      content: "";
+      display: block;
+      font-size: 1rem;
+      height: 0.250em;
+      margin: 1em auto 0 auto;
+      text-align: center;
+      width: 4em;
+    }
+  }
+  &.-upper {
+    text-transform: uppercase;
+  }
+}

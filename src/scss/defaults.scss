@@ -1,0 +1,110 @@
+//  $$$$$$$\             $$$$$$\                     $$\   $$\
+//  $$  __$$\           $$  __$$\                    $$ |  $$ |
+//  $$ |  $$ | $$$$$$\  $$ /  \__|$$$$$$\  $$\   $$\ $$ |$$$$$$\    $$$$$$$\
+//  $$ |  $$ |$$  __$$\ $$$$\     \____$$\ $$ |  $$ |$$ |\_$$  _|  $$  _____|
+//  $$ |  $$ |$$$$$$$$ |$$  _|    $$$$$$$ |$$ |  $$ |$$ |  $$ |    \$$$$$$\
+//  $$ |  $$ |$$   ____|$$ |     $$  __$$ |$$ |  $$ |$$ |  $$ |$$\  \____$$\
+//  $$$$$$$  |\$$$$$$$\ $$ |     \$$$$$$$ |\$$$$$$  |$$ |  \$$$$  |$$$$$$$  |
+//  \_______/  \_______|\__|      \_______| \______/ \__|   \____/ \_______/
+//
+//
+//
+
+// ---------------------------------------------------------------------------------
+// Debug Mode
+// ---------------------------------------------------------------------------------
+
+$debug-mode: false !default;
+
+// ---------------------------------------------------------------------------------
+// BG Image Path
+// ---------------------------------------------------------------------------------
+
+$bg-img-path: '/img/';
+
+
+// ---------------------------------------------------------------------------------
+// Web Fonts
+// ---------------------------------------------------------------------------------
+
+$fonts-path: '/fonts/';
+
+// ---------------------------------------------------------------------------------
+// Colors
+// ---------------------------------------------------------------------------------
+
+$color-black: #000000;
+$color-white: #ffffff;
+
+// http://erskinedesign.com/blog/friendlier-colour-names-sass-maps/
+/* Coolors Exported Palette - coolors.co/202c39-273544-8da1b7-91c0f2-59a3f2 */
+$colors: (
+  darkBlue: (
+    base: rgba(32, 44, 57, 1),
+    alt: rgba(39, 53, 68, 1),
+  ),
+  gray: (
+		base    : #737373,
+		dark    : #2F2F2F,
+    light: rgb(244, 246, 248),
+	),
+  lightBlue: (
+    base: rgba(145, 192, 242, 1),
+    alt: rgba(141, 161, 183, 1),
+  ),
+  sartruse: (
+    base: rgba(234, 82, 111, 1),
+  ),
+  skyBlue: (
+    base: rgba(89, 163, 242, 1),
+  ),
+);
+
+@function color($color, $tone: 'base') {
+	@return map-get(map-get($colors, $color), $tone);
+}
+
+$default-body-color      : color(gray, dark);
+$default-link-color      : color(gray, dark);
+$default-link-color-hover: color(gray, dark);
+
+// ---------------------------------------------------------------------------------
+// Breakpoints
+// ---------------------------------------------------------------------------------
+
+$landscape  : new-breakpoint(orientation landscape);
+$portrait   : new-breakpoint(orientation portrait);
+
+$small-up   : new-breakpoint(min-width 0px);
+$small-only : new-breakpoint(max-width 479px);
+
+$medium-up  : new-breakpoint(min-width 480px);
+$medium-only: new-breakpoint(min-width 480px max-width 767px);
+
+$to-large   : new-breakpoint(max-width 767px);
+$large-up   : new-breakpoint(min-width 768px);
+$large-only : new-breakpoint(min-width 768px max-width 1023px);
+
+$to-xlarge  : new-breakpoint(max-width 1023px);
+$xlarge-up  : new-breakpoint(min-width 1024px);
+$xlarge-only: new-breakpoint(min-width 1024px max-width 1199px);
+
+$to-xxlarge : new-breakpoint(max-width 1199px);
+$xxlarge-up : new-breakpoint(min-width 1200px);
+
+// ---------------------------------------------------------------------------------
+// Sizing
+// ---------------------------------------------------------------------------------
+
+$base-font-size:    16;
+$base-line-height : 1.61803398875;
+$line-height-ratio: $base-line-height / $base-font-size;
+
+// ---------------------------------------------------------------------------------
+// Type
+// ---------------------------------------------------------------------------------
+
+$base-font-family   : "Sentinel SSm A", "Sentinel SSm B", 'Helvetica Neue', Arial, Helvetica, sans-serif;
+$header-font-family : "Ringside Regular SSm A", "Ringside Regular SSm B",  'Helvetica Neue', Arial, Helvetica, sans-serif;
+$body-font-weight   : 400;
+$header-font-weight : 700;

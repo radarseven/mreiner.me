@@ -1,0 +1,44 @@
+.footer-main {
+  align-items: center;
+  background-color: color(darkBlue);
+  color: $color-white;
+  display: flex;
+  font: {
+    size: 90%;
+  }
+  flex-direction: column;
+  justify-content: center;
+  padding: 4em 2em;
+  position: relative;
+  text-align: center;
+  @include media($to-large) {
+    @include angle('before', false, 0.85deg);
+    font: {
+      size: 0.8rem;
+    }
+    padding: 4em 1em;
+  }
+  > * {
+    margin-bottom: 1em;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  > .mark {
+    margin-bottom: 2em;
+    margin-top: -5px;
+  }
+  > .version {
+    background-color: rgba($color-white, 0.8em);
+    border-radius: 0.165em;
+    color: color(darkBlue);
+    font: {
+      family: $header-font-family;
+      size: 85%;
+      weight: 700;
+    }
+    opacity: 0.5;
+    margin-top: 1em;
+    padding: 0.5em;
+  }
+}

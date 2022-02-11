@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="245px" height="248px" viewBox="0 0 245 248" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>ninja-star-cog</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ninja-star-cog">
+            <g id="Ninja-Star-Cog">
+                <g id="Group-2" fill="#202C39">
+                    <g id="Group" transform="translate(8.000000, 0.000000)">
+                        <path d="M110.293011,2.71532395 C112.340325,0.111122441 115.664624,0.117416722 117.706989,2.71532395 L149.5,43.1563263 L78.5,43.1563263 L110.293011,2.71532395 Z" id="Triangle"></path>
+                        <path d="M179.383064,32.8449477 C181.430378,30.2407462 184.754677,30.2470405 186.797042,32.8449477 L218.590053,73.2859501 L147.590053,73.2859501 L179.383064,32.8449477 Z" id="Triangle-Copy" transform="translate(183.090053, 52.090053) rotate(-315.000000) translate(-183.090053, -52.090053) "></path>
+                        <path d="M36.3830643,32.8449477 C38.4303777,30.2407462 41.7546769,30.2470405 43.7970421,32.8449477 L75.5900532,73.2859501 L4.59005317,73.2859501 L36.3830643,32.8449477 Z" id="Triangle-Copy-2" transform="translate(40.090053, 52.090053) scale(-1, 1) rotate(-315.000000) translate(-40.090053, -52.090053) "></path>
+                    </g>
+                    <g id="Group-Copy" transform="translate(123.000000, 201.500000) scale(1, -1) translate(-123.000000, -201.500000) translate(11.000000, 155.000000)">
+                        <path d="M110.293011,2.71532395 C112.340325,0.111122441 115.664624,0.117416722 117.706989,2.71532395 L149.5,43.1563263 L78.5,43.1563263 L110.293011,2.71532395 Z" id="Triangle"></path>
+                        <path d="M179.383064,32.8449477 C181.430378,30.2407462 184.754677,30.2470405 186.797042,32.8449477 L218.590053,73.2859501 L147.590053,73.2859501 L179.383064,32.8449477 Z" id="Triangle-Copy" transform="translate(183.090053, 52.090053) rotate(-315.000000) translate(-183.090053, -52.090053) "></path>
+                        <path d="M36.3830643,32.8449477 C38.4303777,30.2407462 41.7546769,30.2470405 43.7970421,32.8449477 L75.5900532,73.2859501 L4.59005317,73.2859501 L36.3830643,32.8449477 Z" id="Triangle-Copy-2" transform="translate(40.090053, 52.090053) scale(-1, 1) rotate(-315.000000) translate(-40.090053, -52.090053) "></path>
+                    </g>
+                    <path d="M2.62619775,122.08033 C0.0219962408,124.127643 0.0282905217,127.451943 2.62619775,129.494308 L43.0672001,161.287319 L43.0672001,90.2873188" id="Triangle-Copy-3"></path>
+                    <path d="M242.441002,116.793011 C245.045204,118.840325 245.03891,122.164624 242.441002,124.206989 L202,156 L202,85" id="Triangle-Copy-4"></path>
+                    <circle id="Combined-Shape" cx="121.5" cy="123.5" r="89.5"></circle>
+                </g>
+                <circle id="Oval" cx="123" cy="125" r="66.5"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

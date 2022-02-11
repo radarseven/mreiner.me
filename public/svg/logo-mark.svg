@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>Mark</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="720" cy="100" r="100"></circle>
+    </defs>
+    <g id="1.0-Homepage" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD-Copy-2" transform="translate(-620.000000, -50.000000)">
+            <g id="Header" transform="translate(0.000000, 50.000000)">
+                <g id="Mark">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Oval" fill="#273544" xlink:href="#path-1"></use>
+                    <g mask="url(#mask-2)">
+                        <g transform="translate(630.000000, 10.000000)">
+                            <g>
+                                <polygon id="Fill-3" fill="#FEFEFE" points="57.0765916 99.3439344 60.8375546 99.3439344 60.8375546 119.7 89.55 119.7 89.55 59.85 88.9754084 59.85 58.8877042 80.6408094 28.8 59.85 28.8 119.7 57.0765916 119.7 57.0765916 119.7"></polygon>
+                                <path d="M151.2,59.85 L151.2,99.3439344 L129.584534,99.3439344 L151.2,119.7 L94.5,119.7 L94.5,59.85 L151.2,59.85 Z M136.35,81 L136.35,78.3 L110.25,78.3 L110.25,81 L136.35,81 Z" id="Fill-4" fill="#FEFEFE"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

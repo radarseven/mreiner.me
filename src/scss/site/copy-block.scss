@@ -1,0 +1,57 @@
+.copy-block {
+
+	h1 { @include h-xxl }
+	h2 {  }
+	h3 {  }
+	h4 {  }
+	h5 {  }
+	h6 {  }
+
+  h1,h2,h3,h4,h5,h6 {
+    margin-bottom: 1.2em;
+  }
+
+	p { @include p }
+	ul { @include ul }
+	ol { @include p }
+	blockquote { @include blockquote }
+
+	img { @include img }
+	figure { @include figure }
+
+  &.-hero {
+    h2.title {
+      font: {
+        size: 2rem;
+        weight: 800;
+      }
+    }
+    blockquote, p, ol, ul {
+      //font-size: 110%;
+    }
+  }
+
+  .callout {
+    background-color: rgba(color(darkBlue), 0.85);
+    border-radius: 0.165em;
+    color: $color-white;
+    font: {
+      weight: 700;
+    }
+    padding: 0.25em;
+  }
+
+  .intro {
+    font: {
+      size: 110%;
+    }
+    margin: 0 auto;
+    @include media($to-large) {
+      padding: 0 4em;
+    }
+    @include media($large-up) {
+      max-width: 38em;
+    }
+  }
+
+}

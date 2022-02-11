@@ -1,0 +1,262 @@
+.logo-mark {
+  position: absolute;
+  left: 50%;
+  top: 1.5em; // -35px when fixed to top.
+  transform: translateX(-50%);
+  z-index: 9;
+  @include media($to-large) {
+    top: 1.5em;
+  }
+  > a {
+    display: block;
+    transition: 0.2s all $ease-in-out-quad;
+    &:hover {
+      transform: rotate(360deg);
+      > img {
+        transform: skew(-7deg);
+      }
+    }
+    > img {
+      display: block;
+    }
+  }
+}
+
+/**
+ * Intro
+ */
+.about-me {
+  @include angle('after', false, 1.7deg);
+  @include angle('before', false, 1.7deg);
+  background: color(lightBlue);
+  color: $color-white;
+  font: {
+    size: 1.2rem;
+  }
+  line-height: $base-line-height * 1.5;
+  margin-top: 7em;
+  padding: 4em auto;
+  > .inner {
+    @include angle('after', true, 1.7deg);
+    @include angle('before', true, 1.7deg);
+    background-color: color(skyBlue);
+    padding: 4em;
+    > .container {
+      margin: 0 auto;
+      @include media($large-up) {
+        max-width: 30em;
+      }
+      > .copy-block > p {
+        font: {
+          size: 1.05em;
+          weight: 500;
+        }
+        line-height: $base-line-height * 1.1;
+      }
+    }
+  }
+}
+
+/**
+ * Hire Me, please!
+ */
+.hire-me {
+  background-color: color(gray, light);
+  position: relative;
+  @include media($large-up) {
+    padding: 0 8em;
+  }
+  > .container {
+    display: flex;
+    flex-direction: row;
+    @include media($to-large) {
+      flex-direction: column;
+    }
+    > .content {
+      flex: 0 0 55%;
+      padding: 14em 0 6em 0;
+      @include media($to-large) {
+        flex: 1 0 100%;
+        padding: 10em 4em 4em 4em;
+      }
+      @include media($large-up) {
+        margin-right: $gutter;
+        padding-left: 4em;
+        padding-right: 2em;
+      }
+    }
+    > .visual {
+      background-image: url('/img/mr-headshot-square@2x.png');
+      background-repeat: no-repeat;
+      background-position: top left;
+      background-size: cover;
+      flex: 1 0 45%;
+      height: 100%;
+      @include media($to-large) {
+        display: block;
+        width: 100%;
+        height: 325px;
+        background-position: center -65px, top;
+      }
+      @include media($large-up) {
+        -webkit-clip-path: polygon(23% 0, 100% 0, 100% 100%, 0% 100%);
+        clip-path: polygon(23% 0, 100% 0, 100% 100%, 0% 100%);
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 45%;
+      }
+    }
+  }
+}
+
+/**
+ * Recent Work
+ */
+.recent-work {
+  padding: 6em 0 0 0;
+  .work-cards {
+    display: flex;
+    flex-direction: column;
+    margin: 4em auto;
+    > .card {
+      $border-radius: 0.3em;
+      background-color: rgba(color(gray, light), 0.5);
+      border-radius: $border-radius;
+      box-shadow: 0 0 2px 0 rgba(color(lightBlue, alt), 0.25);
+      flex: 0 1 45%;
+      justify-content: center;
+      margin: 1em auto 3em auto;
+      transition: 0.2s all $ease-in-out-quad;
+      &:after,
+      &:before {
+        border-radius: $border-radius;
+      }
+      &:hover {
+        @include angle('after', false, 1.7deg);
+        background-color: rgba(color(gray, light), 1.0);
+        box-shadow: 0 0 6px 2px rgba(color(lightBlue, alt), 0.33);
+      }
+      &:nth-child(odd) {
+        @include angle('after', false, 0.85deg);
+        > .title {
+          @include angle('before', true, 1.7deg);
+        }
+      }
+      &:nth-child(even) {
+        @include angle('after', true, 0.85deg);
+        > .title {
+          @include angle('before', false, 1.7deg);
+        }
+      }
+      @include media($large-up) {
+        max-width: 64em;
+      }
+      > .title {
+        background-color: rgba(color(gray, light), 1.0);
+        border-bottom: 1px solid rgba(color(darkBlue),0.1);
+        border-top-left-radius: $border-radius;
+        padding: 1em 2em 0 2em;
+        &:before {
+          border-radius: $border-radius;
+        }
+      }
+      > .content {
+        display: flex;
+        flex: 1 0 100%;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        padding: 4em 0 2.5em 0;
+        @include media($to-large) {
+          flex-direction: column;
+          flex-wrap: nowrap;
+        }
+        > .visual {
+          flex: 1 0 45%;
+          margin-right: 2.5em;
+          max-width: 100%;
+          @include media($to-large) {
+            flex: 1 0 100%;
+            margin: 0;
+          }
+          > img {
+            max-width: 100%;
+            @include media($to-large) {
+              border-bottom: 1px solid rgba(color(darkBlue),0.1);
+            }
+          }
+          > .tags {
+            margin: 0 auto;
+            padding: 1em;
+            text-align: center;
+            > li {
+              background-color: color(darkBlue);
+              border-radius: 3px;
+              color: rgba($color-white, 0.8);
+              display: inline-block;
+              font: {
+                family: $header-font-family;
+                size: 0.85rem;
+              }
+              letter-spacing: -0.25px;
+              margin: 0 0 0.5em 0.5em;
+              padding: 0.33em 0.5em;
+            }
+          }
+        }
+        .copy-block {
+          flex: 1 0 50%;
+          font: {
+            size: 1rem;
+          }
+          padding-right: 2em;
+          @include media($to-large) {
+            flex: 1 0 100%;
+            margin: 0 0 1em 0;
+            padding: 0 4em;
+          }
+        }
+      }
+      > .action {
+        margin: 0 auto 2em auto;
+        text-align: center;
+      }
+    }
+  }
+}
+
+/**
+ * Find Me
+ */
+.find-me {
+  @include angle('before', true, 0.85deg);
+  background-color: color(lightBlue, alt);
+  color: color(darkBlue);
+  padding: 2em;
+  text-align: center;
+  > .social-media {
+    margin: 2em auto;
+    > li {
+      display: inline-block;
+      &:not(:last-child) {
+        margin-right: 1em;
+      }
+      > a {
+      	background-color: rgba(color(gray, light), 0.5);
+      	border-radius: 100%;
+        display: block;
+        height: 66px;
+        line-height: 66px;
+      	text-align: center;
+      	width: 66px;
+        &:hover {
+      	  background-color: rgba(color(gray, light), 0.75);
+        }
+      	> i {
+      	  line-height: inherit;
+      	  vertical-align: middle;
+        }
+      }
+    }
+  }
+}

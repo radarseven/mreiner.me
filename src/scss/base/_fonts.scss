@@ -1,0 +1,45 @@
+//  $$$$$$$$\                   $$\
+//  $$  _____|                  $$ |
+//  $$ |    $$$$$$\  $$$$$$$\ $$$$$$\    $$$$$$$\
+//  $$$$$\ $$  __$$\ $$  __$$\\_$$  _|  $$  _____|
+//  $$  __|$$ /  $$ |$$ |  $$ | $$ |    \$$$$$$\
+//  $$ |   $$ |  $$ |$$ |  $$ | $$ |$$\  \____$$\
+//  $$ |   \$$$$$$  |$$ |  $$ | \$$$$  |$$$$$$$  |
+//  \__|    \______/ \__|  \__|  \____/ \_______/
+//
+//
+//
+
+$fonts: (
+  'montserratblack',
+  'montserratbold',
+  'montserratlight'
+  'montserratmedium',
+  'montserratregular',
+  'montserrat_alternatessemibold',
+  'montserrat_alternatesblack',
+  'montserrat_alternatesbold',
+  'montserrat_alternatesmedium',
+  'montserrat_alternatesregular',
+  'montserrat_alternatessemibold',
+  'ralewayblack',
+  'ralewayblack_italic',
+  'ralewaybold',
+  'ralewaybold_italic',
+  'ralewayextrabold',
+  'ralewayextrabold_italic',
+  'raleway_italic',
+  'ralewaymedium',
+  'ralewaymedium_italic',
+  'ralewayregular'
+);
+
+@each $font in $fonts {
+  @font-face {
+    font-family: '#{$font}';
+    src: url('#{$fonts-path}#{$font}.woff2') format('woff2'),
+         url('#{$fonts-path}#{$font}.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+  }
+}
