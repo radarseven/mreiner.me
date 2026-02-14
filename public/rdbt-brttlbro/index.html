@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roundabout Brattleboro 2026</title>
+<title>Roundabout Brattleboro 2026 — Winhall At Risk</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -26,6 +26,84 @@
     --font-body:    'Source Serif 4', Georgia, serif;
     --font-mono:    'Space Mono', monospace;
   }
+
+  /* ─── At-Risk Variant ─── */
+  .status-banner {
+    position: fixed;
+    top: 56px;
+    left: 0; right: 0;
+    z-index: 99;
+    background: #c8a800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.55rem 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #1a1208;
+    font-weight: 700;
+  }
+
+  .status-banner .pulse {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #1a1208;
+    flex-shrink: 0;
+    animation: pulseAnim 1.4s infinite;
+  }
+
+  @keyframes pulseAnim {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .status-banner a {
+    color: #1a1208;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  nav { border-bottom-color: #c8a800 !important; }
+
+  .camp-card.at-risk::before { background: #c8a800; }
+
+  .at-risk-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #7a6000;
+    background: rgba(200, 168, 0, 0.15);
+    border: 1px solid rgba(200, 168, 0, 0.4);
+    padding: 0.25rem 0.6rem;
+    margin-bottom: 0.75rem;
+    align-self: flex-start;
+  }
+
+  .winhall-status-box {
+    border-left: 3px solid #c8a800;
+    background: rgba(200, 168, 0, 0.07);
+    padding: 1rem 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .winhall-status-box strong {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #7a6000;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .winhall-status-box p { margin: 0; font-size: 0.9rem; max-width: none; }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -114,7 +192,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 6rem 6vw 4rem;
+    padding: 9rem 6vw 4rem;
     background:
       radial-gradient(ellipse at 60% 40%, rgba(74, 103, 65, 0.18) 0%, transparent 60%),
       radial-gradient(ellipse at 20% 80%, rgba(181, 82, 26, 0.12) 0%, transparent 50%),
@@ -925,6 +1003,12 @@
 </head>
 <body>
 
+<!-- At-Risk Status Banner -->
+<div class="status-banner">
+  <div class="pulse"></div>
+  <span>Night 2 Status: Winhall Brook — <strong>At Risk</strong> · Decision day-of departure · Hapgood Pond is the confirmed backup</span>
+</div>
+
 <!-- Navigation -->
 <nav>
   <span class="wordmark">RB 2026</span>
@@ -940,7 +1024,7 @@
 
 <!-- Hero -->
 <section class="hero">
-  <p class="hero-tag">Vermont · Summer 2026 · All-Terrain Loop</p>
+  <p class="hero-tag">Vermont · Summer 2026 · Winhall Brook: At Risk</p>
   <h1>Roundabout<em>Brattleboro</em></h1>
 
   <div class="hero-meta">
@@ -1001,9 +1085,9 @@
         <div class="tleg"><div class="tleg-dot" style="background:#d4832a"></div>Paved (25%)</div>
       </div>
 
-      <div class="alert-box" style="margin-top:2rem;">
-        <strong>⚠ Trail Alert — Vermont Flooding</strong>
-        <p>Winhall Brook Campground remains closed following the July 2023 floods. Our itinerary routes around this — see camping section for the alternatives we've locked in. Check bikepacking.com/routes/roundabout-brattleboro for any updated alerts before departure.</p>
+      <div class="winhall-status-box">
+        <strong>⚠ Night 2 Status: Winhall Brook — At Risk</strong>
+        <p>Winhall Brook Campground has been closed since the July 2023 Vermont floods. There is a possibility it reopens before our trip — we'll make the call the morning of departure. <strong>Hapgood Pond is fully booked as the confirmed backup.</strong> Riders should be prepared for either option. Check bikepacking.com/routes/roundabout-brattleboro for current alerts.</p>
       </div>
     </div>
 
@@ -1105,12 +1189,13 @@
         <div class="day-content">
           <p>The wildest day on the route. You climb into the Green Mountain National Forest and hit the IP (International Paper) Road — a long, remote doubletrack behind Stratton Mountain that feels genuinely backcountry. Rocky in places, beautiful throughout. This is the section people talk about.</p>
           <p>The middle stretch (miles 40–80 of the overall route) has zero resupply — carry what you need from the previous evening. Whitingham or Wilmington are your last sure bets before a long gap.</p>
-          <p>Night 2 is at <strong>Hapgood Pond Campground</strong> in Peru, VT — a legitimate GMNF campground with pit toilets and swimming. A spot of luxury after the IP Road.</p>
+          <p><strong>Night 2 is a game-time decision.</strong> Winhall Brook Campground is the original route camp — closer, on the classic line, and a more authentic experience if it's open. Hapgood Pond is the confirmed backup: a legitimate USFS campground 8 miles further with pit toilets and swimming. We'll call it the morning of departure based on latest status.</p>
           <div class="stops-row">
             <div class="stop-chip warning">⚠ No resupply for 40+ mi</div>
             <div class="stop-chip food">🥪 Carry food from Night 1</div>
             <div class="stop-chip water">💧 Streams throughout GMNF</div>
-            <div class="stop-chip camp">⛺ Hapgood Pond (reserve on recreation.gov)</div>
+            <div class="stop-chip camp" style="border-color:#c8a800; color:#7a6000;">⛺ Winhall Brook (if open) — decision day-of</div>
+            <div class="stop-chip camp">⛺ Hapgood Pond (confirmed backup)</div>
           </div>
         </div>
       </div>
@@ -1179,7 +1264,7 @@
 <section class="camping" id="camping">
   <p class="section-label reveal">Where We Sleep</p>
   <h2 class="reveal">The <em>Camping Plan</em></h2>
-  <p class="reveal">Three nights, three different situations. Winhall Brook is closed — here's what we're doing instead.</p>
+  <p class="reveal">Three nights, three different situations. Winhall Brook is <em>at risk</em> — we call it the morning we leave. Hapgood Pond is confirmed and reserved either way.</p>
 
   <div class="camp-grid reveal">
 
@@ -1196,14 +1281,27 @@
       </div>
     </div>
 
+    <div class="camp-card at-risk">
+      <div class="at-risk-badge"> Night 2 — Status: At Risk</div>
+      <div class="camp-night">Night 2 — Primary Target (If Open)</div>
+      <h3>Winhall Brook Campground</h3>
+      <p>The classic Night 2 stop on the original route — right on the line, on the banks of the West River, with a great flow from the IP Road day. Closed since the July 2023 Vermont floods due to bathroom damage.</p>
+      <p><strong>Status as of early 2026: closed, possible reopening pending construction.</strong> We're monitoring it. Decision will be made the morning of departure — if it's open, we go to Winhall. If not, Hapgood Pond is confirmed and ready.</p>
+      <div class="camp-detail">
+        <span class="camp-tag" style="background:rgba(200,168,0,0.12); color:#7a6000;">⚠ At Risk — Decision Day-Of</span>
+        <span class="camp-tag">Classic Route Camp</span>
+        <span class="camp-tag">West River Access</span>
+      </div>
+    </div>
+
     <div class="camp-card night-2">
-      <div class="camp-night">Night 2</div>
+      <div class="camp-night">Night 2 — Confirmed Backup</div>
       <h3>Hapgood Pond Campground, Peru VT</h3>
-      <p>A legitimate USFS campground in the Green Mountain National Forest near Peru, VT. Pit toilets, fire rings, and a swimming pond. This is the one to book early — it fills up on summer weekends.</p>
-      <p>Reserve on <strong>recreation.gov</strong> as soon as the season opens. Look for sites on the north loop for quieter forest sites.</p>
+      <p>A legitimate USFS campground in the Green Mountain National Forest near Peru, VT. Pit toilets, fire rings, and a swimming pond. 8 miles further than Winhall Brook but a genuinely excellent campground.</p>
+      <p>Already reserved on <strong>recreation.gov</strong>. If Winhall is closed, this is where we sleep — no scramble, no stress.</p>
       <div class="camp-detail">
         <span class="camp-tag">USFS Campground</span>
-        <span class="camp-tag action">⚑ Reserve Now</span>
+        <span class="camp-tag" style="background:rgba(74,103,65,0.15); color:var(--moss);">✓ Reserved</span>
         <span class="camp-tag">Pit Toilets</span>
         <span class="camp-tag">Swimming</span>
         <span class="camp-tag">Fire Rings</span>
@@ -1239,9 +1337,9 @@
 
   </div>
 
-  <div class="alert-box reveal" style="margin-top:2rem; max-width:680px;">
-    <strong>❌ Winhall Brook Campground — Do Not Plan On It</strong>
-    <p>The classic Night 2 camp on the original route has been closed since the July 2023 Vermont floods and is not expected to reopen in 2025 or 2026. Hapgood Pond is 8 miles further but a genuinely better campground.</p>
+  <div class="winhall-status-box reveal" style="margin-top:2rem; max-width:680px;">
+    <strong>⚠ Winhall Brook — At Risk · Call It Day-Of</strong>
+    <p>We're treating Winhall as a possible bonus, not a given. Hapgood Pond is reserved and confirmed. If Winhall reopens before we leave Brattleboro, we ride to Winhall. If not, we ride 8 more miles to Hapgood Pond. Either way, riders go to bed fed and sheltered. No drama.</p>
   </div>
 </section>
 
@@ -1425,7 +1523,8 @@
     <div class="checklist-col">
       <h3>Do Now</h3>
       <ul class="check-items" id="list-now">
-        <li><div class="check-box" onclick="toggleCheck(this)"></div>Reserve Hapgood Pond on recreation.gov (fills fast)</li>
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Hapgood Pond reserved on recreation.gov (confirmed backup — Night 2)</li>
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Monitor Winhall Brook status — check recreation.gov + bikepacking.com alerts</li>
         <li><div class="check-box" onclick="toggleCheck(this)"></div>Book Grafton Inn if choosing Night 3 Option B</li>
         <li><div class="check-box" onclick="toggleCheck(this)"></div>Confirm group size — under 11 for no Mollie Beattie permit</li>
         <li><div class="check-box" onclick="toggleCheck(this)"></div>Share RideWithGPS route link with all riders</li>
@@ -1448,6 +1547,7 @@
     <div class="checklist-col">
       <h3>Day Before</h3>
       <ul class="check-items" id="list-before">
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Check Winhall Brook status — final call before leaving Brattleboro</li>
         <li><div class="check-box" onclick="toggleCheck(this)"></div>Download route offline on all devices (Maps.me or Komoot)</li>
         <li><div class="check-box" onclick="toggleCheck(this)"></div>Check 5-day Vermont weather forecast</li>
         <li><div class="check-box" onclick="toggleCheck(this)"></div>Top up tubeless sealant if last done 3+ months ago</li>
@@ -1508,7 +1608,7 @@
 
 <!-- Footer -->
 <footer>
-  <span>Roundabout Brattleboro 2026 — Rider Guide</span>
+  <span>Roundabout Brattleboro 2026 — Winhall Brook: At Risk Variant</span>
   <span>
     <a href="https://ridewithgps.com/routes/53287138?privacy_code=mPmirxtYGQWmoJrhdP1mAbc3jAdtSKHx" target="_blank">RideWithGPS Route</a>
     &nbsp;·&nbsp;
