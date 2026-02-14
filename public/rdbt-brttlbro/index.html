@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roundabout Brattleboro 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* ─── Design System ─── */
+  :root {
+    --dirt:      #2c1f14;
+    --bark:      #4a3728;
+    --rust:      #b5521a;
+    --amber:     #d4832a;
+    --straw:     #e8d5a3;
+    --fog:       #f2ece0;
+    --moss:      #4a6741;
+    --lichen:    #7a9a6f;
+    --sky:       #8ab3c5;
+    --cream:     #faf6ee;
+    --ink:       #1a1208;
+
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body:    'Source Serif 4', Georgia, serif;
+    --font-mono:    'Space Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── Topo Background Texture ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 39px,
+        rgba(74, 55, 40, 0.04) 39px,
+        rgba(74, 55, 40, 0.04) 40px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 39px,
+        rgba(74, 55, 40, 0.025) 39px,
+        rgba(74, 55, 40, 0.025) 40px
+      );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── Navigation ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(44, 31, 20, 0.95);
+    backdrop-filter: blur(8px);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    border-bottom: 2px solid var(--rust);
+  }
+
+  nav .wordmark {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--straw);
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav ul a {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--straw);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s, color 0.2s;
+  }
+
+  nav ul a:hover { opacity: 1; color: var(--amber); }
+
+  /* ─── Hero ─── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 6rem 6vw 4rem;
+    background:
+      radial-gradient(ellipse at 60% 40%, rgba(74, 103, 65, 0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(181, 82, 26, 0.12) 0%, transparent 50%),
+      var(--dirt);
+    overflow: hidden;
+  }
+
+  /* Decorative topo rings in hero */
+  .hero::before {
+    content: '';
+    position: absolute;
+    right: -5%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 70vw;
+    max-width: 700px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 131, 42, 0.12);
+    box-shadow:
+      0 0 0 60px rgba(212, 131, 42, 0.06),
+      0 0 0 120px rgba(212, 131, 42, 0.04),
+      0 0 0 190px rgba(212, 131, 42, 0.025),
+      0 0 0 270px rgba(212, 131, 42, 0.015);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 10vw, 9rem);
+    font-weight: 900;
+    line-height: 0.9;
+    color: var(--fog);
+    max-width: 14ch;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.4s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--amber);
+    display: block;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.7s forwards;
+  }
+
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .hero-stat .num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--amber);
+    line-height: 1;
+  }
+
+  .hero-stat .label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--straw);
+    opacity: 0.7;
+  }
+
+  .hero-divider {
+    width: 1px;
+    background: rgba(232, 213, 163, 0.2);
+    height: 50px;
+    align-self: center;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 3.5rem;
+    padding: 1rem 2rem;
+    background: var(--rust);
+    color: var(--cream);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: 2px solid var(--rust);
+    transition: background 0.25s, color 0.25s;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.9s forwards;
+  }
+
+  .hero-cta:hover { background: transparent; color: var(--rust); }
+
+  .hero-cta svg { width: 14px; height: 14px; }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 1.2s forwards;
+  }
+
+  .scroll-hint span {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(232, 213, 163, 0.4);
+  }
+
+  .scroll-arrow {
+    width: 20px;
+    height: 20px;
+    border-right: 1.5px solid rgba(232, 213, 163, 0.3);
+    border-bottom: 1.5px solid rgba(232, 213, 163, 0.3);
+    transform: rotate(45deg);
+    animation: bounce 1.6s infinite;
+  }
+
+  /* ─── Section Wrappers ─── */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 6rem 6vw;
+  }
+
+  section + section {
+    border-top: 1px solid rgba(74, 55, 40, 0.12);
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::before {
+    content: '//';
+    opacity: 0.5;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--bark);
+    margin-bottom: 1.5rem;
+  }
+
+  h2 em {
+    font-style: italic;
+    color: var(--rust);
+  }
+
+  p { max-width: 65ch; color: #3d2d1e; margin-bottom: 1rem; }
+
+  /* ─── Route Overview ─── */
+  .route-overview {
+    background: var(--fog);
+  }
+
+  .route-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 3rem;
+    align-items: start;
+  }
+
+  .route-facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(74, 55, 40, 0.12);
+    border: 1px solid rgba(74, 55, 40, 0.12);
+    margin-top: 2rem;
+  }
+
+  .fact-cell {
+    background: var(--cream);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .fact-cell .val {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--rust);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .fact-cell .key {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--bark);
+    opacity: 0.7;
+  }
+
+  .route-desc h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--bark);
+    margin-bottom: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .terrain-bar {
+    display: flex;
+    height: 12px;
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 1rem 0 0.4rem;
+    background: rgba(74,55,40,0.08);
+  }
+
+  .terrain-segment {
+    height: 100%;
+    transition: opacity 0.2s;
+  }
+
+  .terrain-legend {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.4rem;
+  }
+
+  .tleg {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bark);
+    opacity: 0.8;
+  }
+
+  .tleg-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .alert-box {
+    border-left: 3px solid var(--rust);
+    background: rgba(181, 82, 26, 0.06);
+    padding: 1rem 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .alert-box strong {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rust);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .alert-box p { margin: 0; font-size: 0.9rem; max-width: none; }
+
+  /* ─── Itinerary ─── */
+  .itinerary {
+    background: var(--cream);
+  }
+
+  .days-container {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .day-card {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    border: 1px solid rgba(74, 55, 40, 0.12);
+    border-bottom: none;
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+
+  .day-card:last-child { border-bottom: 1px solid rgba(74, 55, 40, 0.12); }
+
+  .day-card:hover { background: rgba(212, 131, 42, 0.04); }
+
+  .day-num {
+    background: var(--bark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 0;
+    border-right: 1px solid rgba(74, 55, 40, 0.15);
+  }
+
+  .day-num .d {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--straw);
+    opacity: 0.6;
+  }
+
+  .day-num .n {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--amber);
+    line-height: 1;
+  }
+
+  .day-body {
+    padding: 1.5rem 2rem;
+  }
+
+  .day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .day-title {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--bark);
+  }
+
+  .day-stats {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .day-stat {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--rust);
+  }
+
+  .day-stat span { color: var(--bark); opacity: 0.6; margin-right: 0.3rem; }
+
+  .day-content {
+    display: none;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed rgba(74,55,40,0.15);
+  }
+
+  .day-card.open .day-content { display: block; }
+
+  .day-content p { font-size: 0.95rem; margin-bottom: 0.75rem; max-width: none; }
+
+  .stops-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .stop-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .stop-chip.food { border-color: var(--amber); color: var(--amber); }
+  .stop-chip.camp { border-color: var(--moss); color: var(--moss); }
+  .stop-chip.water { border-color: var(--sky); color: #4a7a8a; }
+  .stop-chip.warning { border-color: var(--rust); color: var(--rust); }
+
+  .day-toggle {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  /* ─── Camping ─── */
+  .camping {
+    background: var(--fog);
+  }
+
+  .camp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .camp-card {
+    background: var(--cream);
+    border: 1px solid rgba(74, 55, 40, 0.12);
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .camp-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+  }
+
+  .camp-card.night-1::before { background: var(--moss); }
+  .camp-card.night-2::before { background: var(--sky); }
+  .camp-card.night-3a::before { background: var(--amber); }
+  .camp-card.night-3b::before { background: var(--rust); }
+
+  .camp-night {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bark);
+    opacity: 0.6;
+    margin-bottom: 0.4rem;
+  }
+
+  .camp-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--bark);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .camp-card p { font-size: 0.9rem; margin-bottom: 0.5rem; max-width: none; }
+
+  .camp-detail {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .camp-tag {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    background: rgba(74, 55, 40, 0.08);
+    color: var(--bark);
+  }
+
+  .camp-tag.action {
+    background: rgba(181, 82, 26, 0.1);
+    color: var(--rust);
+  }
+
+  /* ─── Resupply ─── */
+  .resupply {
+    background: var(--cream);
+  }
+
+  .resupply-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2.5rem;
+    font-size: 0.9rem;
+  }
+
+  .resupply-table thead tr {
+    border-bottom: 2px solid var(--bark);
+  }
+
+  .resupply-table th {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bark);
+    text-align: left;
+    padding: 0.75rem 1rem;
+    opacity: 0.7;
+  }
+
+  .resupply-table td {
+    padding: 1rem 1rem;
+    border-bottom: 1px solid rgba(74, 55, 40, 0.1);
+    color: #3d2d1e;
+    vertical-align: top;
+  }
+
+  .resupply-table tr:hover td { background: rgba(212, 131, 42, 0.04); }
+
+  .resupply-table .mile {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--rust);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .resupply-table .place {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--bark);
+  }
+
+  .supply-chips {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-top: 0.3rem;
+  }
+
+  .supply-chip {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.45rem;
+    border-radius: 2px;
+  }
+
+  .supply-chip.food    { background: rgba(212, 131, 42, 0.15); color: #7a4a10; }
+  .supply-chip.water   { background: rgba(138, 179, 197, 0.25); color: #2a5a6a; }
+  .supply-chip.beer    { background: rgba(181, 82, 26, 0.12); color: var(--rust); }
+  .supply-chip.lodging { background: rgba(74, 103, 65, 0.15); color: var(--moss); }
+  .supply-chip.gap     { background: rgba(74, 55, 40, 0.1); color: var(--bark); }
+
+  /* ─── Gear & Kit ─── */
+  .gear {
+    background: var(--fog);
+  }
+
+  .gear-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+
+  .gear-category h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--bark);
+    border-bottom: 1px solid rgba(74,55,40,0.15);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .gear-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .gear-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    color: #3d2d1e;
+  }
+
+  .gear-list li::before {
+    content: '—';
+    color: var(--amber);
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+  }
+
+  .gear-note {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--moss);
+    margin-top: 1.25rem;
+    padding: 0.75rem 1rem;
+    background: rgba(74, 103, 65, 0.08);
+    border-left: 2px solid var(--lichen);
+  }
+
+  /* ─── Critical Checklist ─── */
+  .checklist-section {
+    background: var(--bark);
+    color: var(--straw);
+  }
+
+  .checklist-section .section-label { color: var(--amber); }
+
+  .checklist-section h2 { color: var(--fog); }
+
+  .checklist-section p { color: rgba(232, 213, 163, 0.8); }
+
+  .checklist-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .checklist-col h3 {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(232, 213, 163, 0.15);
+  }
+
+  .check-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .check-items li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.88rem;
+    color: rgba(232, 213, 163, 0.85);
+    line-height: 1.5;
+  }
+
+  .check-box {
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid rgba(232, 213, 163, 0.3);
+    flex-shrink: 0;
+    margin-top: 3px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .check-box.checked {
+    background: var(--amber);
+    border-color: var(--amber);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 7l3.5 3.5 6.5-7' stroke='%232c1f14' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+
+  /* ─── Emergency / Contact ─── */
+  .emergency {
+    background: var(--cream);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: rgba(74, 55, 40, 0.12);
+    border: 1px solid rgba(74, 55, 40, 0.12);
+    margin-top: 2.5rem;
+  }
+
+  .contact-cell {
+    background: var(--cream);
+    padding: 1.5rem;
+  }
+
+  .contact-cell .contact-type {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bark);
+    opacity: 0.6;
+    margin-bottom: 0.3rem;
+  }
+
+  .contact-cell .contact-name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--bark);
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-cell .contact-info {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--rust);
+  }
+
+  .contact-cell p {
+    font-size: 0.85rem;
+    margin: 0.4rem 0 0;
+    max-width: none;
+    color: #5a4030;
+  }
+
+  /* ─── Footer ─── */
+  footer {
+    background: var(--ink);
+    color: rgba(232, 213, 163, 0.5);
+    padding: 2.5rem 6vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  footer a {
+    color: var(--amber);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  footer a:hover { opacity: 1; }
+
+  /* ─── Animations ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: rotate(45deg) translateY(0); }
+    50%       { transform: rotate(45deg) translateY(4px); }
+  }
+
+  /* ─── Reveal on scroll ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 768px) {
+    nav ul { display: none; }
+    .route-grid, .gear-cols { grid-template-columns: 1fr; gap: 2rem; }
+    .checklist-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: clamp(3rem, 14vw, 5rem); }
+    .hero-meta { gap: 1.5rem; flex-wrap: wrap; }
+    .hero-divider { display: none; }
+    section { padding: 4rem 5vw; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <span class="wordmark">RB 2026</span>
+  <ul>
+    <li><a href="#route">Route</a></li>
+    <li><a href="#itinerary">Itinerary</a></li>
+    <li><a href="#camping">Camps</a></li>
+    <li><a href="#resupply">Resupply</a></li>
+    <li><a href="#gear">Gear</a></li>
+    <li><a href="#checklist">Checklist</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <p class="hero-tag">Vermont · Summer 2026 · All-Terrain Loop</p>
+  <h1>Roundabout<em>Brattleboro</em></h1>
+
+  <div class="hero-meta">
+    <div class="hero-stat">
+      <span class="num">137</span>
+      <span class="label">Miles Total</span>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <span class="num">10,500</span>
+      <span class="label">Feet Climbing</span>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <span class="num">4</span>
+      <span class="label">Days Riding</span>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <span class="num">75%</span>
+      <span class="label">Unpaved</span>
+    </div>
+  </div>
+
+  <a href="https://ridewithgps.com/routes/53287138?privacy_code=mPmirxtYGQWmoJrhdP1mAbc3jAdtSKHx" target="_blank" class="hero-cta">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    View Route on RideWithGPS
+  </a>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- Route Overview -->
+<section class="route-overview" id="route">
+  <p class="section-label reveal">Route Brief</p>
+  <h2 class="reveal">137 Miles of <em>Quintessential Vermont</em></h2>
+
+  <div class="route-grid">
+    <div class="route-left reveal">
+      <p>A 137-mile hardtail loop starting and ending in Brattleboro, VT. Designed by Joe Cruz for bikepacking.com — this v2.1 variant threads through the Green Mountain National Forest, behind Stratton Mountain on the legendary IP Road, and through some of Vermont's most beautiful hill villages.</p>
+
+      <p>The character changes as you ride: the first day rolls through open valley farmland; the middle two days dig into remote forest doubletrack and rocky pitches; the final day brings you back through pastoral hill country and the village of Grafton.</p>
+
+      <h3>Terrain Breakdown</h3>
+      <div class="terrain-bar">
+        <div class="terrain-segment" style="width:45%; background:#7a9a6f;"></div>
+        <div class="terrain-segment" style="width:20%; background:#4a6741;"></div>
+        <div class="terrain-segment" style="width:10%; background:#3a5231;"></div>
+        <div class="terrain-segment" style="width:25%; background:#d4832a;"></div>
+      </div>
+      <div class="terrain-legend">
+        <div class="tleg"><div class="tleg-dot" style="background:#7a9a6f"></div>Dirt Road (45%)</div>
+        <div class="tleg"><div class="tleg-dot" style="background:#4a6741"></div>Doubletrack (20%)</div>
+        <div class="tleg"><div class="tleg-dot" style="background:#3a5231"></div>Singletrack (10%)</div>
+        <div class="tleg"><div class="tleg-dot" style="background:#d4832a"></div>Paved (25%)</div>
+      </div>
+
+      <div class="alert-box" style="margin-top:2rem;">
+        <strong>⚠ Trail Alert — Vermont Flooding</strong>
+        <p>Winhall Brook Campground remains closed following the July 2023 floods. Our itinerary routes around this — see camping section for the alternatives we've locked in. Check bikepacking.com/routes/roundabout-brattleboro for any updated alerts before departure.</p>
+      </div>
+    </div>
+
+    <div class="route-right reveal">
+      <div class="route-facts">
+        <div class="fact-cell">
+          <div class="val">137 mi</div>
+          <div class="key">Total Distance</div>
+        </div>
+        <div class="fact-cell">
+          <div class="val">10,500 ft</div>
+          <div class="key">Total Climbing</div>
+        </div>
+        <div class="fact-cell">
+          <div class="val">75%</div>
+          <div class="key">Unpaved</div>
+        </div>
+        <div class="fact-cell">
+          <div class="val">5 / 10</div>
+          <div class="key">Difficulty (4-day)</div>
+        </div>
+        <div class="fact-cell">
+          <div class="val">Brattleboro</div>
+          <div class="key">Start &amp; Finish</div>
+        </div>
+        <div class="fact-cell">
+          <div class="val">4 Days</div>
+          <div class="key">Trip Length</div>
+        </div>
+      </div>
+
+      <div style="margin-top:2rem;">
+        <h3 style="font-family:var(--font-display); font-size:1.1rem; color:var(--bark); margin-bottom:0.75rem;">Highlights</h3>
+        <ul class="gear-list">
+          <li>IP Road behind Stratton Mountain — wild, remote, unforgettable</li>
+          <li>Harriman Reservoir via the Catamount Trail</li>
+          <li>Hapgood Pond Campground in GMNF</li>
+          <li>Grafton Village — cheese, pints, and covered bridges</li>
+          <li>Mollie Beattie State Forest primitive camp</li>
+          <li>Zero-resupply zone miles 40–80 (carry food &amp; water)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Itinerary -->
+<section class="itinerary" id="itinerary">
+  <p class="section-label reveal">Day-by-Day</p>
+  <h2 class="reveal">The <em>Itinerary</em></h2>
+  <p class="reveal">Tap any day to expand. ~35–45 miles per day, with pub stops built in and never a death march.</p>
+
+  <div class="days-container reveal">
+
+    <!-- Day 1 -->
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-num">
+        <span class="d">Day</span>
+        <span class="n">1</span>
+      </div>
+      <div class="day-body">
+        <div class="day-header">
+          <div class="day-title">Brattleboro → Harriman Reservoir</div>
+          <div class="day-stats">
+            <div class="day-stat"><span>~</span>38 mi</div>
+            <div class="day-stat"><span>~</span>3,200 ft</div>
+          </div>
+          <div class="day-toggle">expand ↓</div>
+        </div>
+        <div class="day-content">
+          <p>Roll out of Brattleboro heading southwest, climbing into the hills almost immediately. Classic Vermont backroads — quiet dirt, rolling farmland, and valley views. The town of Wilmington (around mile 30) is your best food stop of the day, with solid lunch options and a general store for any top-ups.</p>
+          <p>Past Wilmington, you skirt the northern edge of Harriman Reservoir on doubletrack — a genuinely beautiful section. Find a dispersed site in the trees near the reservoir or on National Forest land shortly after. Water is plentiful here.</p>
+          <p><strong>Zero-carry worry zone.</strong> This is the comfortable day. Legs are fresh, the hills are manageable, and Brattleboro's a great town to start from with the Co-op right on the route.</p>
+          <div class="stops-row">
+            <div class="stop-chip food">🍽 Brattleboro Co-op (start)</div>
+            <div class="stop-chip food">🍺 Wilmington ~mi 30</div>
+            <div class="stop-chip water">💧 Reservoir + streams</div>
+            <div class="stop-chip camp">⛺ Dispersed — Harriman area</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-num">
+        <span class="d">Day</span>
+        <span class="n">2</span>
+      </div>
+      <div class="day-body">
+        <div class="day-header">
+          <div class="day-title">Harriman → IP Road → Hapgood Pond</div>
+          <div class="day-stats">
+            <div class="day-stat"><span>~</span>42 mi</div>
+            <div class="day-stat"><span>~</span>3,800 ft</div>
+          </div>
+          <div class="day-toggle">expand ↓</div>
+        </div>
+        <div class="day-content">
+          <p>The wildest day on the route. You climb into the Green Mountain National Forest and hit the IP (International Paper) Road — a long, remote doubletrack behind Stratton Mountain that feels genuinely backcountry. Rocky in places, beautiful throughout. This is the section people talk about.</p>
+          <p>The middle stretch (miles 40–80 of the overall route) has zero resupply — carry what you need from the previous evening. Whitingham or Wilmington are your last sure bets before a long gap.</p>
+          <p>Night 2 is at <strong>Hapgood Pond Campground</strong> in Peru, VT — a legitimate GMNF campground with pit toilets and swimming. A spot of luxury after the IP Road.</p>
+          <div class="stops-row">
+            <div class="stop-chip warning">⚠ No resupply for 40+ mi</div>
+            <div class="stop-chip food">🥪 Carry food from Night 1</div>
+            <div class="stop-chip water">💧 Streams throughout GMNF</div>
+            <div class="stop-chip camp">⛺ Hapgood Pond (reserve on recreation.gov)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 3 -->
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-num">
+        <span class="d">Day</span>
+        <span class="n">3</span>
+      </div>
+      <div class="day-body">
+        <div class="day-header">
+          <div class="day-title">Hapgood Pond → South Londonderry → Grafton</div>
+          <div class="day-stats">
+            <div class="day-stat"><span>~</span>35 mi</div>
+            <div class="day-stat"><span>~</span>2,800 ft</div>
+          </div>
+          <div class="day-toggle">expand ↓</div>
+        </div>
+        <div class="day-content">
+          <p>The most civilized day. You drop out of the forest and into the valley towns, with Corner Market in South Londonderry serving up the best breakfast sandwiches on the route. Legs are tired by now and this day is mercifully a bit shorter.</p>
+          <p>Roll into Grafton in the afternoon — a genuinely lovely village. Grafton Village Cheese is unmissable (open daily), and the Grafton Inn's pub does excellent food and beer. Dinner here is earned.</p>
+          <p>Night 3 has two solid options — see the Camping section for the full breakdown.</p>
+          <div class="stops-row">
+            <div class="stop-chip food">☕ Corner Market, S. Londonderry</div>
+            <div class="stop-chip food">🧀 Grafton Village Cheese</div>
+            <div class="stop-chip food">🍺 Grafton Inn pub</div>
+            <div class="stop-chip camp">⛺ Mollie Beattie or Grafton Inn</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 4 -->
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-num">
+        <span class="d">Day</span>
+        <span class="n">4</span>
+      </div>
+      <div class="day-body">
+        <div class="day-header">
+          <div class="day-title">Grafton → Brattleboro</div>
+          <div class="day-stats">
+            <div class="day-stat"><span>~</span>22 mi</div>
+            <div class="day-stat"><span>~</span>700 ft</div>
+          </div>
+          <div class="day-toggle">expand ↓</div>
+        </div>
+        <div class="day-content">
+          <p>The homestretch. Mercifully short, with the bulk of the climbing behind you. Mostly paved and gentle doubletrack as the hills soften and the Connecticut River valley opens up. Brattleboro feels earned.</p>
+          <p>Back in town, the Hermit Thrush Brewery and McNeill's both do excellent post-ride pints. The Brattleboro Food Co-op is a perfect loop close — the same place you probably grabbed snacks at the start.</p>
+          <p><strong>The numbers don't capture it.</strong> This final roll-in is one of those quiet moments where you realize you've ridden a full loop through real Vermont terrain and made it back.</p>
+          <div class="stops-row">
+            <div class="stop-chip food">🍺 Hermit Thrush / McNeill's (finish)</div>
+            <div class="stop-chip food">🛒 Brattleboro Food Co-op</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Camping -->
+<section class="camping" id="camping">
+  <p class="section-label reveal">Where We Sleep</p>
+  <h2 class="reveal">The <em>Camping Plan</em></h2>
+  <p class="reveal">Three nights, three different situations. Winhall Brook is closed — here's what we're doing instead.</p>
+
+  <div class="camp-grid reveal">
+
+    <div class="camp-card night-1">
+      <div class="camp-night">Night 1</div>
+      <h3>Dispersed Camping — Harriman Reservoir Area</h3>
+      <p>National Forest dispersed camping near the reservoir or on GMNF land shortly after the Catamount Trail section. No reservation needed, no fee.</p>
+      <p>Water is available from reservoir tributaries and streams — filter everything. Find a site off the doubletrack in the trees.</p>
+      <div class="camp-detail">
+        <span class="camp-tag">Free</span>
+        <span class="camp-tag">No Reservation</span>
+        <span class="camp-tag">Water Nearby</span>
+        <span class="camp-tag">GMNF Land</span>
+      </div>
+    </div>
+
+    <div class="camp-card night-2">
+      <div class="camp-night">Night 2</div>
+      <h3>Hapgood Pond Campground, Peru VT</h3>
+      <p>A legitimate USFS campground in the Green Mountain National Forest near Peru, VT. Pit toilets, fire rings, and a swimming pond. This is the one to book early — it fills up on summer weekends.</p>
+      <p>Reserve on <strong>recreation.gov</strong> as soon as the season opens. Look for sites on the north loop for quieter forest sites.</p>
+      <div class="camp-detail">
+        <span class="camp-tag">USFS Campground</span>
+        <span class="camp-tag action">⚑ Reserve Now</span>
+        <span class="camp-tag">Pit Toilets</span>
+        <span class="camp-tag">Swimming</span>
+        <span class="camp-tag">Fire Rings</span>
+      </div>
+    </div>
+
+    <div class="camp-card night-3a">
+      <div class="camp-night">Night 3 — Option A (Recommended)</div>
+      <h3>Mollie Beattie State Forest, near Grafton</h3>
+      <p>A gem of a primitive camp right on the route — free, officially permitted, and in a beautiful CCC-era forest east of Grafton. Groups under 11 need no permit. Hike bikes in from Gate 2 parking area.</p>
+      <p><strong>Important:</strong> The old CCC stone house is strictly off-limits for camping. Camp in the designated tent sites in the forest proper. Howe Brook is your water source. Call the district office to confirm current access before the trip.</p>
+      <div class="camp-detail">
+        <span class="camp-tag">Free</span>
+        <span class="camp-tag">No Reservation</span>
+        <span class="camp-tag">Groups &lt;11</span>
+        <span class="camp-tag">Howe Brook Water</span>
+        <span class="camp-tag action">📞 Call (802) 289-0603</span>
+      </div>
+    </div>
+
+    <div class="camp-card night-3b">
+      <div class="camp-night">Night 3 — Option B</div>
+      <h3>The Grafton Inn</h3>
+      <p>The classic New England inn in the heart of Grafton village. A proper bed, hot shower, and the inn's own pub with excellent food — the only bit of luxury on the trip. Book well in advance for summer dates.</p>
+      <p>If you go this route, consider it a half-rest day: arrive by 4pm, eat, shower, and actually sleep in a bed for once.</p>
+      <div class="camp-detail">
+        <span class="camp-tag">Bed &amp; Breakfast</span>
+        <span class="camp-tag">Pub On-Site</span>
+        <span class="camp-tag action">⚑ Book in Advance</span>
+        <span class="camp-tag">graftoninnvermont.com</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="alert-box reveal" style="margin-top:2rem; max-width:680px;">
+    <strong>❌ Winhall Brook Campground — Do Not Plan On It</strong>
+    <p>The classic Night 2 camp on the original route has been closed since the July 2023 Vermont floods and is not expected to reopen in 2025 or 2026. Hapgood Pond is 8 miles further but a genuinely better campground.</p>
+  </div>
+</section>
+
+<!-- Resupply -->
+<section class="resupply" id="resupply">
+  <p class="section-label reveal">Food & Water</p>
+  <h2 class="reveal"><em>Resupply</em> Guide</h2>
+  <p class="reveal">The big gap is miles 40–80. Everything else has options if you're paying attention.</p>
+
+  <table class="resupply-table reveal">
+    <thead>
+      <tr>
+        <th>Mile</th>
+        <th>Location</th>
+        <th>What's There</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="mile">0</td>
+        <td>
+          <div class="place">Brattleboro, VT</div>
+          <div class="supply-chips">
+            <span class="supply-chip food">Food</span>
+            <span class="supply-chip water">Water</span>
+            <span class="supply-chip beer">Beer</span>
+            <span class="supply-chip lodging">Lodging</span>
+          </div>
+        </td>
+        <td>Brattleboro Food Co-op, restaurants, Hermit Thrush Brewery, McNeill's</td>
+        <td>Start/finish. Load up on snacks. The Co-op has excellent bulk food for the route.</td>
+      </tr>
+      <tr>
+        <td class="mile">~30</td>
+        <td>
+          <div class="place">Wilmington, VT</div>
+          <div class="supply-chips">
+            <span class="supply-chip food">Food</span>
+            <span class="supply-chip water">Water</span>
+            <span class="supply-chip beer">Beer</span>
+          </div>
+        </td>
+        <td>General store, restaurants, pubs</td>
+        <td>Last proper resupply before the big gap. Stock 2 meals + snacks for the night and all of Day 2.</td>
+      </tr>
+      <tr>
+        <td class="mile">40–80</td>
+        <td>
+          <div class="place">Zero Resupply Zone</div>
+          <div class="supply-chips">
+            <span class="supply-chip gap">No Services</span>
+          </div>
+        </td>
+        <td>GMNF — remote doubletrack and the IP Road section</td>
+        <td>Water from streams (filter required). Carry food for this entire stretch. Don't underestimate it.</td>
+      </tr>
+      <tr>
+        <td class="mile">~80</td>
+        <td>
+          <div class="place">South Londonderry, VT</div>
+          <div class="supply-chips">
+            <span class="supply-chip food">Food</span>
+            <span class="supply-chip water">Water</span>
+          </div>
+        </td>
+        <td>Corner Market — best breakfast sandwiches on the route</td>
+        <td>Day 3 morning stop. Open early. This is a morale-defining stop after the IP Road day.</td>
+      </tr>
+      <tr>
+        <td class="mile">~100</td>
+        <td>
+          <div class="place">Grafton, VT</div>
+          <div class="supply-chips">
+            <span class="supply-chip food">Food</span>
+            <span class="supply-chip beer">Beer</span>
+            <span class="supply-chip lodging">Lodging</span>
+          </div>
+        </td>
+        <td>Grafton Village Cheese, Grafton Inn pub</td>
+        <td>Dinner stop. Get cheese. Get a pint at the Inn. Camp at Mollie Beattie or stay in.</td>
+      </tr>
+      <tr>
+        <td class="mile">~137</td>
+        <td>
+          <div class="place">Brattleboro, VT (Finish)</div>
+          <div class="supply-chips">
+            <span class="supply-chip beer">Beer</span>
+            <span class="supply-chip food">Food</span>
+          </div>
+        </td>
+        <td>Hermit Thrush, McNeill's, the Co-op</td>
+        <td>You made it. Hermit Thrush has exceptional Vermont sours. McNeill's is grittier and excellent.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="alert-box reveal" style="margin-top:2rem; max-width:600px;">
+    <strong>💧 Water Strategy</strong>
+    <p>Bring a reliable filter (Sawyer Squeeze or BeFree). Vermont streams are abundant throughout the GMNF sections but assume everything needs filtering. The IP Road has multiple stream crossings. In drought conditions, the early sections near Harriman can run low — fill when you see water.</p>
+  </div>
+</section>
+
+<!-- Gear -->
+<section class="gear" id="gear">
+  <p class="section-label reveal">What to Bring</p>
+  <h2 class="reveal">Gear <em>Notes</em></h2>
+  <p class="reveal">Hardtail territory. The IP Road is the defining section — rocky, rooty doubletrack with loose corners. Gear for trail conditions and Vermont summer weather.</p>
+
+  <div class="gear-cols reveal">
+    <div>
+      <div class="gear-category">
+        <h3>The Bike</h3>
+        <ul class="gear-list">
+          <li>Hardtail 29er is the sweet spot for this route</li>
+          <li>2.2–2.4" tires, tubeless if possible</li>
+          <li>Drop bars or flared drop bars for the dirt sections</li>
+          <li>Minimum 1× drivetrain, 30–32t minimum bailout</li>
+          <li>Dynamo hub lighting for dawn/dusk starts</li>
+          <li>Carry a spare derailleur hanger — the IP Road is rough</li>
+        </ul>
+      </div>
+      <div class="gear-category" style="margin-top:2rem;">
+        <h3>Bikepacking Bags</h3>
+        <ul class="gear-list">
+          <li>Frame bag: max volume for trail fuel</li>
+          <li>Seat bag: sleeping kit + shelter</li>
+          <li>Top tube bag: snacks, phone, emergency items</li>
+          <li>Handlebar bag or roll: clothing and layers</li>
+          <li>No panniers — the trail sections don't forgive racks</li>
+        </ul>
+      </div>
+      <div class="gear-note">Tip: Weigh everything before you pack. The IP Road will punish a heavy bike. Aim for under 45 lbs all-in.</div>
+    </div>
+
+    <div>
+      <div class="gear-category">
+        <h3>Sleep System</h3>
+        <ul class="gear-list">
+          <li>3-season sleeping bag rated to 30°F / -1°C</li>
+          <li>Lightweight bivy or ultralight tent</li>
+          <li>Inflatable sleeping pad (R-value 2+ for summer)</li>
+          <li>Ground sheet if using bivy on rocky ground</li>
+          <li>Summer nights can drop to 45–55°F — don't underpack</li>
+        </ul>
+      </div>
+      <div class="gear-category" style="margin-top:2rem;">
+        <h3>Clothing (Vermont Summer)</h3>
+        <ul class="gear-list">
+          <li>1× riding kit + 1× spare baselayer minimum</li>
+          <li>Wind/rain shell — thunderstorms are common in July</li>
+          <li>Lightweight insulation for camp (merino or Nano Puff)</li>
+          <li>Camp shoes / sandals (feet will thank you)</li>
+          <li>Sun protection — ridge sections have no shade</li>
+          <li>Warm gloves for cold morning starts</li>
+        </ul>
+      </div>
+      <div class="gear-category" style="margin-top:2rem;">
+        <h3>Tools & Safety</h3>
+        <ul class="gear-list">
+          <li>Sawyer Squeeze or BeFree water filter</li>
+          <li>Tube, patch kit, and tire plugs</li>
+          <li>Multi-tool with chain breaker</li>
+          <li>Satellite communicator (Garmin inReach recommended)</li>
+          <li>Paper map backup — cell coverage is unreliable in GMNF</li>
+          <li>Download route offline before leaving Brattleboro</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Checklist -->
+<section class="checklist-section" id="checklist">
+  <p class="section-label reveal">Before You Leave</p>
+  <h2 class="reveal">Trip <em>Checklist</em></h2>
+  <p class="reveal" style="color:rgba(232,213,163,0.7)">Tap items to check them off. Your progress saves in the browser.</p>
+
+  <div class="checklist-grid reveal">
+
+    <div class="checklist-col">
+      <h3>Do Now</h3>
+      <ul class="check-items" id="list-now">
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Reserve Hapgood Pond on recreation.gov (fills fast)</li>
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Book Grafton Inn if choosing Night 3 Option B</li>
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Confirm group size — under 11 for no Mollie Beattie permit</li>
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Share RideWithGPS route link with all riders</li>
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Lock in trip dates and travel logistics to Brattleboro</li>
+      </ul>
+    </div>
+
+    <div class="checklist-col">
+      <h3>A Few Weeks Out</h3>
+      <ul class="check-items" id="list-weeks">
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Call Mollie Beattie district office: (802) 289-0603 — confirm access and fire rules</li>
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Check bikepacking.com route alerts for current flood/trail closures</li>
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Service bikes: drivetrain, brakes, tubeless top-up</li>
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Stock spare derailleur hangers for each rider's bike</li>
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Test sleep system — is your bag actually warm enough?</li>
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Confirm satellite communicator is charged and registered</li>
+      </ul>
+    </div>
+
+    <div class="checklist-col">
+      <h3>Day Before</h3>
+      <ul class="check-items" id="list-before">
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Download route offline on all devices (Maps.me or Komoot)</li>
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Check 5-day Vermont weather forecast</li>
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Top up tubeless sealant if last done 3+ months ago</li>
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Pack food for Day 2 zero-resupply section from Wilmington</li>
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Brief all riders on the 40-mile no-resupply section</li>
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Full bike pack + weigh — aim for under 45 lbs</li>
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Charge all devices, backup batteries, and GPS</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- Emergency / Contacts -->
+<section class="emergency" id="emergency">
+  <p class="section-label reveal">Safety</p>
+  <h2 class="reveal">Key <em>Contacts</em></h2>
+
+  <div class="contact-grid reveal">
+    <div class="contact-cell">
+      <div class="contact-type">Emergency</div>
+      <div class="contact-name">Windham County Sheriff</div>
+      <div class="contact-info">(802) 365-4942</div>
+      <p>Primary emergency contact for the Windham County sections of the route.</p>
+    </div>
+    <div class="contact-cell">
+      <div class="contact-type">GMNF Ranger</div>
+      <div class="contact-name">Manchester District Office</div>
+      <div class="contact-info">(802) 362-2307</div>
+      <p>Covers the IP Road / Stratton Mountain section and GMNF camping zones.</p>
+    </div>
+    <div class="contact-cell">
+      <div class="contact-type">Camping — Night 3</div>
+      <div class="contact-name">Mollie Beattie District Office</div>
+      <div class="contact-info">(802) 289-0603</div>
+      <p>Call to confirm access and current conditions before departure. Ask about gate status at Gate 2.</p>
+    </div>
+    <div class="contact-cell">
+      <div class="contact-type">Night 2 Campground</div>
+      <div class="contact-name">Hapgood Pond Campground</div>
+      <div class="contact-info">recreation.gov</div>
+      <p>Reservations essential for summer weekends. Book well in advance.</p>
+    </div>
+    <div class="contact-cell">
+      <div class="contact-type">Hospital (Nearest)</div>
+      <div class="contact-name">Brattleboro Memorial Hospital</div>
+      <div class="contact-info">(802) 257-0341</div>
+      <p>17 Belmont Ave, Brattleboro. Nearest full hospital to both start and finish.</p>
+    </div>
+    <div class="contact-cell">
+      <div class="contact-type">Route Source</div>
+      <div class="contact-name">bikepacking.com</div>
+      <div class="contact-info">bikepacking.com/routes/roundabout-brattleboro</div>
+      <p>Check for current route alerts and community updates before departure.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <span>Roundabout Brattleboro 2026 — Rider Guide</span>
+  <span>
+    <a href="https://ridewithgps.com/routes/53287138?privacy_code=mPmirxtYGQWmoJrhdP1mAbc3jAdtSKHx" target="_blank">RideWithGPS Route</a>
+    &nbsp;·&nbsp;
+    <a href="https://bikepacking.com/routes/roundabout-brattleboro/" target="_blank">Route Guide (bikepacking.com)</a>
+  </span>
+  <span>Vermont · 137 mi · 10,500 ft · 4 days</span>
+</footer>
+
+<script>
+  // Toggle day cards
+  function toggleDay(card) {
+    const wasOpen = card.classList.contains('open');
+    document.querySelectorAll('.day-card').forEach(c => {
+      c.classList.remove('open');
+      const t = c.querySelector('.day-toggle');
+      if (t) t.textContent = 'expand ↓';
+    });
+    if (!wasOpen) {
+      card.classList.add('open');
+      const t = card.querySelector('.day-toggle');
+      if (t) t.textContent = 'close ↑';
+    }
+  }
+
+  // Toggle checklist items with localStorage persistence
+  function toggleCheck(box) {
+    box.classList.toggle('checked');
+    saveChecks();
+  }
+
+  function saveChecks() {
+    const boxes = document.querySelectorAll('.check-box');
+    const state = Array.from(boxes).map(b => b.classList.contains('checked'));
+    try { localStorage.setItem('rb2026_checks', JSON.stringify(state)); } catch(e) {}
+  }
+
+  function loadChecks() {
+    try {
+      const saved = localStorage.getItem('rb2026_checks');
+      if (!saved) return;
+      const state = JSON.parse(saved);
+      const boxes = document.querySelectorAll('.check-box');
+      boxes.forEach((box, i) => {
+        if (state[i]) box.classList.add('checked');
+      });
+    } catch(e) {}
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Init
+  loadChecks();
+</script>
+
+</body>
+</html>
