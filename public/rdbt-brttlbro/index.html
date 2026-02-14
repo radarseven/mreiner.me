@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roundabout Brattleboro 2026 — Winhall At Risk</title>
+<title>Roundabout Brattleboro 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAFO0lEQVR4nOVbPU7sQAw2aA9AQRWJlpIjUCBR0U37TpCCA3ACDkCRE9Cme9VKW+wRtqRdKRUFN+AVjINj7Bl7ZrJCel+1m8zY/myP5yfJGZwI193Fp6f92/RxtpYtFKspkQiPfffX0jcM0wO/tpZDmgulxDlhiZiEVL/WjmgmDIlT462Ec5BktnJEtRBOPEV67Ls/VrlhmF4VGQs9tY4o7mwhzglrpCTk+rZyRFEnSj5F3EM4B00mtaHECe4O193Fpxb1NYhzSDqoPV4nmBunon4K4hyaI7zZYGqUI39K4hxcv9cJ2QatyY99d5drE4Zp55RZ7ASTAzh5b8pT0hZy3vaSTWhzlQM08hbiJSRayKH2WZyg3qglX0O6Vq7HCRvponfnRg0EqIt4CmGYdqU6rruLT8kJoldKor9W1Ev1WbPgx4VTkB/77ka7F4bp4JBT7QRxCGhCSowg7WbSKZLWdvH+LqU/DNNrzv6FA6Top2Ahj4SskaXtLH1zTiDtHr64waIWnGeMV71nJR+G6eBJa2b0IQzTITVkYru5OAr3XlPb8DkDvNFPwRv1HKgTamRKWaBmQGn0a6OugWfDfvvC7xdlwQbAN++3mO7GvrvS7oVhOub6I/n99gVu7x9pX1M9APheF8xDgKZ/6Q4Po0+NVHCkhjMZVwC6Iy7D05xZmgwJdEagXLPToBWUfA2Q+Nh3V9QJ1KG3949YZ6r1uRzgSX8aHSkbpGssnY/oBE4+Bc8wAADYlK77KVLR50Q1Avvti+SU4z7IOrEg1mTddXfxuQFoM/4lxPGcLWoAace0glQHkgshipLqfxmejgC+YtUCqSmRw+wADVoa8qkOneCJKG37Pj5f8WuWVWIO1Q7QUBt9T+GrQZNpcOy7FmJESORb6qvKgGiIWoXfx+fFf+sw4PejHq2YHmocUpQBXGEYpsV/SgDb8jYa2Lhf6Lq9f4T99mUhC+979SDcGUANispSpzs/+lmzgGZPlDMXVdb3RtJjRfEQkDw99t1sHFZtT0Qkp1j7eyOPcDlASjNtKsKlLG2fig5PfdZvsS8g9iymYIsejvPY8QGfsGqwLIIuwxMA5Ket1DBoNeVlDkvnle85PyXVDg9Kiow1C1JFk0c/V0NSevgy/236OGuyEArDdECDeASpEziwymPK875a6lO9dZYXTIO4J9DGmXSdOGEmw9cI/D+ST41naTqOewDznmV2wPeBoe1Q9MdQGL7maKwDFHFLe6T/OWFB/lHUAwAjPBdXfc5xA/A1Fui5gOWBgoRISt2jk4iJ22TL9rn0JIhugwG+3xsw1wDicfNWkxkwywnDdOQR5NdLlrc0/a0ZMjvgbfo4o9Nh6ig5cwR9GPvuxrJNjaRNxqLMRHaljuoXhyDmJ0OSwVFgrt3iDN87hXI91mcNJVN19ukwrwWMvOXx2PzbY5inH6/8bG+gRh+gYBqMUw3+3Y19p+4LGG5IhExPhyEWu1Rk4z2RvAWmFyS0GcFSqBSjXe8HVOhJRh8g4YAowHRarCx+skZ74dEjPQWSHCAWQalhZlZAQ+7gqy4kaJSD68iRp9dcL0lhhzCA65E5FsQWD1AleOWmUh/hflHSukIcne/3tZJjGfcURa/K4lCwLpULSFS9KZob9xRVL0uX7Bcsy2hvxozC22AAjV6WRrR0QkvUkAdo9MGEd0i0AE95tGe1DyYoUtmARpXItYDrKIk6xSofTa3hCIk41XvSj6YoLI5AeByi9W1FHHHSDye1laQEtgP9vR9Ocvy3n85y/LcfT2v4rZ/P/wNBlIMBgGI7LAAAAABJRU5ErkJggg==">
 <style>
   /* ─── Design System ─── */
   :root {
@@ -989,6 +990,118 @@
     transform: translateY(0);
   }
 
+  /* ─── Route Map Embed ─── */
+  .route-map {
+    background: var(--dirt);
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .map-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.5rem 6vw 2rem;
+    background: var(--dirt);
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .map-header-left {}
+
+  .map-header .section-label {
+    color: var(--amber);
+    margin-bottom: 0.4rem;
+  }
+
+  .map-header h2 {
+    color: var(--fog);
+    margin-bottom: 0;
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+  }
+
+  .map-header h2 em { color: var(--amber); }
+
+  .map-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .map-meta-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    text-align: right;
+  }
+
+  .map-meta-stat .val {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--amber);
+    line-height: 1;
+  }
+
+  .map-meta-stat .lbl {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--straw);
+    opacity: 0.6;
+  }
+
+  .rwgps-wrap {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    background: #1a1208;
+  }
+
+  .rwgps-wrap iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+    display: block;
+  }
+
+  .map-footer-strip {
+    background: var(--bark);
+    padding: 1rem 6vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .map-footer-strip p {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--straw);
+    opacity: 0.6;
+    margin: 0;
+    max-width: none;
+  }
+
+  .map-footer-strip a {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber);
+    text-decoration: none;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+  }
+
+  .map-footer-strip a:hover { opacity: 1; }
+
   /* ─── Responsive ─── */
   @media (max-width: 768px) {
     nav ul { display: none; }
@@ -1014,6 +1127,7 @@
   <span class="wordmark">RB 2026</span>
   <ul>
     <li><a href="#route">Route</a></li>
+    <li><a href="#map">Map</a></li>
     <li><a href="#itinerary">Itinerary</a></li>
     <li><a href="#camping">Camps</a></li>
     <li><a href="#resupply">Resupply</a></li>
@@ -1049,14 +1163,61 @@
     </div>
   </div>
 
-  <a href="https://ridewithgps.com/routes/53287138?privacy_code=mPmirxtYGQWmoJrhdP1mAbc3jAdtSKHx" target="_blank" class="hero-cta">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-    View Route on RideWithGPS
-  </a>
+  <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:3.5rem; opacity:0; animation: fadeUp 0.9s 0.9s forwards;">
+    <a href="#map" class="hero-cta" style="margin-top:0;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+      Explore the Route
+    </a>
+    <a href="https://ridewithgps.com/routes/53287138?privacy_code=mPmirxtYGQWmoJrhdP1mAbc3jAdtSKHx" target="_blank" class="hero-cta" style="margin-top:0; background:transparent; color:var(--straw); border-color:rgba(232,213,163,0.3);">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      Open in RideWithGPS
+    </a>
+  </div>
 
   <div class="scroll-hint">
     <span>Scroll</span>
     <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- Route Map Embed -->
+<section class="route-map" id="map">
+  <div class="map-header">
+    <div class="map-header-left">
+      <p class="section-label" style="color:var(--amber);">// Live Route Map</p>
+      <h2>The <em>Full Loop</em></h2>
+    </div>
+    <div class="map-meta">
+      <div class="map-meta-stat">
+        <span class="val">137 mi</span>
+        <span class="lbl">Distance</span>
+      </div>
+      <div class="map-meta-stat">
+        <span class="val">10,500 ft</span>
+        <span class="lbl">Elevation</span>
+      </div>
+      <div class="map-meta-stat">
+        <span class="val">Brattleboro</span>
+        <span class="lbl">Start &amp; Finish</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="rwgps-wrap">
+    <iframe
+      src="https://ridewithgps.com/embeds?type=route&id=53287138&metricUnits=false&sampleGraph=true&privacyCode=mPmirxtYGQWmoJrhdP1mAbc3jAdtSKHx"
+      scrolling="no"
+      allowfullscreen
+      loading="lazy"
+      title="Roundabout Brattleboro 2026 Route">
+    </iframe>
+  </div>
+
+  <div class="map-footer-strip">
+    <p>Interactive map · Zoom, pan, and explore the elevation profile · Click any segment for details</p>
+    <a href="https://ridewithgps.com/routes/53287138?privacy_code=mPmirxtYGQWmoJrhdP1mAbc3jAdtSKHx" target="_blank">
+      Open full route in RideWithGPS ↗
+    </a>
   </div>
 </section>
 
