@@ -287,11 +287,19 @@
     align-self: center;
   }
 
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 3.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.9s forwards;
+  }
+
   .hero-cta {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    margin-top: 3.5rem;
     padding: 1rem 2rem;
     background: var(--rust);
     color: var(--cream);
@@ -302,11 +310,21 @@
     text-transform: uppercase;
     border: 2px solid var(--rust);
     transition: background 0.25s, color 0.25s;
-    opacity: 0;
-    animation: fadeUp 0.9s 0.9s forwards;
   }
 
   .hero-cta:hover { background: transparent; color: var(--rust); }
+
+  .hero-cta-ghost {
+    background: transparent;
+    color: var(--straw);
+    border-color: rgba(232, 213, 163, 0.3);
+  }
+
+  .hero-cta-ghost:hover {
+    background: rgba(232, 213, 163, 0.1);
+    color: var(--straw);
+    border-color: rgba(232, 213, 163, 0.6);
+  }
 
   .hero-cta svg { width: 14px; height: 14px; }
 
@@ -1104,13 +1122,141 @@
 
   /* ─── Responsive ─── */
   @media (max-width: 768px) {
+
+    /* Nav */
     nav ul { display: none; }
-    .route-grid, .gear-cols { grid-template-columns: 1fr; gap: 2rem; }
-    .checklist-grid { grid-template-columns: 1fr; }
-    .hero h1 { font-size: clamp(3rem, 14vw, 5rem); }
-    .hero-meta { gap: 1.5rem; flex-wrap: wrap; }
+    nav { padding: 0 1.25rem; }
+
+    /* Status banner — tighter text wrap */
+    .status-banner {
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      padding: 0.5rem 1rem;
+      text-align: center;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 9rem 5vw 4rem;
+      align-items: flex-start;
+    }
+    .hero h1 { font-size: clamp(2.8rem, 13vw, 5rem); }
+    .hero-meta {
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
     .hero-divider { display: none; }
-    section { padding: 4rem 5vw; }
+    .hero-stat .num { font-size: 1.5rem; }
+
+    /* Hero dual CTAs — stack vertically */
+    .hero-ctas {
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+      max-width: 320px;
+    }
+    .hero-cta {
+      width: 100%;
+      justify-content: center;
+      padding: 0.9rem 1.5rem;
+    }
+
+    /* All sections — consistent padding */
+    section { padding: 3.5rem 5vw; }
+    .route-map { padding: 0; }
+
+    /* Map header */
+    .map-header {
+      padding: 2rem 5vw 1.5rem;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .map-meta {
+      gap: 1rem;
+    }
+    .map-meta-stat { text-align: left; }
+
+    /* Route grid */
+    .route-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    /* Route facts — 2 cols is fine on mobile */
+    .route-facts { grid-template-columns: 1fr 1fr; }
+    .fact-cell .val { font-size: 1.4rem; }
+
+    /* Terrain legend wrap */
+    .terrain-legend { gap: 0.75rem; }
+
+    /* Day cards */
+    .day-card { grid-template-columns: 60px 1fr; }
+    .day-num .n { font-size: 1.8rem; }
+    .day-body { padding: 1.25rem 1rem; }
+    .day-header { gap: 0.5rem; }
+    .day-title { font-size: 1.1rem; }
+    .day-toggle { font-size: 0.55rem; }
+    .stops-row { gap: 0.5rem; }
+    .stop-chip { font-size: 0.55rem; padding: 0.3rem 0.6rem; }
+
+    /* Camp grid — single column */
+    .camp-grid { grid-template-columns: 1fr; }
+
+    /* Resupply table — horizontal scroll */
+    .resupply-table {
+      display: block;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
+      font-size: 0.82rem;
+    }
+    .resupply-table td,
+    .resupply-table th { padding: 0.75rem 0.75rem; }
+    .supply-chips { flex-wrap: nowrap; }
+
+    /* Gear columns */
+    .gear-cols { grid-template-columns: 1fr; gap: 2rem; }
+
+    /* Checklist */
+    .checklist-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .checklist-section { padding: 3.5rem 5vw; }
+
+    /* Contact grid — 1 col */
+    .contact-grid { grid-template-columns: 1fr; }
+
+    /* Map footer strip */
+    .map-footer-strip {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 1rem 5vw;
+    }
+
+    /* Footer */
+    footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 2rem 5vw;
+    }
+
+    /* Typography */
+    h2 { font-size: clamp(1.7rem, 7vw, 2.5rem); }
+    .section-label { font-size: 0.55rem; }
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: clamp(2.4rem, 15vw, 3.5rem); }
+    .route-facts { grid-template-columns: 1fr 1fr; }
+    .fact-cell .val { font-size: 1.2rem; }
+    .map-meta { gap: 0.75rem; }
+    .day-card { grid-template-columns: 50px 1fr; }
+    .day-num .n { font-size: 1.5rem; }
+    .day-num .d { font-size: 0.5rem; }
+    .camp-grid { gap: 1rem; }
   }
 </style>
 </head>
@@ -1163,12 +1309,12 @@
     </div>
   </div>
 
-  <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:3.5rem; opacity:0; animation: fadeUp 0.9s 0.9s forwards;">
-    <a href="#map" class="hero-cta" style="margin-top:0;">
+  <div class="hero-ctas">
+    <a href="#map" class="hero-cta">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
       Explore the Route
     </a>
-    <a href="https://ridewithgps.com/routes/53287138?privacy_code=mPmirxtYGQWmoJrhdP1mAbc3jAdtSKHx" target="_blank" class="hero-cta" style="margin-top:0; background:transparent; color:var(--straw); border-color:rgba(232,213,163,0.3);">
+    <a href="https://ridewithgps.com/routes/53287138?privacy_code=mPmirxtYGQWmoJrhdP1mAbc3jAdtSKHx" target="_blank" class="hero-cta hero-cta-ghost">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       Open in RideWithGPS
     </a>
