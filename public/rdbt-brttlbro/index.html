@@ -6,16 +6,17 @@
 <title>Roundabout Brattleboro 2026</title>
 <!-- Open Graph / iMessage preview -->
 <meta property="og:type"        content="website">
+<meta property="og:url"         content="https://mreiner.me/rdbt-brttlbro/">
 <meta property="og:title"       content="Roundabout Brattleboro 2026">
-<meta property="og:description" content="A 4-day, 137-mile all-terrain bikepacking loop through Vermont. 10,500 ft of climbing, 75% unpaved, pub stops included. 🤘">
-<meta property="og:image"       content="og-image.png">
+<meta property="og:description" content="A 4-day, 137-mile all-terrain bikepacking loop through Vermont. 10,500 ft of climbing, 75% unpaved, pub stops included.">
+<meta property="og:image"       content="https://mreiner.me/rdbt-brttlbro/og-image.png">
 <meta property="og:image:width"  content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt"   content="Roundabout Brattleboro 2026 — A 4-day all-terrain bikepacking loop">
 <meta name="twitter:card"        content="summary_large_image">
 <meta name="twitter:title"       content="Roundabout Brattleboro 2026">
 <meta name="twitter:description" content="A 4-day, 137-mile all-terrain bikepacking loop through Vermont. 10,500 ft of climbing, 75% unpaved, pub stops included.">
-<meta name="twitter:image"       content="og-image.png">
+<meta name="twitter:image"       content="https://mreiner.me/rdbt-brttlbro/og-image.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,6 +44,7 @@
 
   /* ─── At-Risk Variant ─── */
   .status-banner {
+    display: none !important;
     position: fixed;
     top: 56px;
     left: 0; right: 0;
@@ -80,7 +82,7 @@
     text-underline-offset: 2px;
   }
 
-  nav { border-bottom-color: #c8a800 !important; }
+  /* nav { border-bottom-color: #c8a800 !important; } */
 
   .camp-card.at-risk::before { background: #c8a800; }
 
@@ -168,7 +170,8 @@
     align-items: center;
     justify-content: space-between;
     height: 56px;
-    border-bottom: 2px solid var(--rust);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    /* border-bottom: 2px solid var(--rust); */
   }
 
   nav .wordmark {
@@ -197,6 +200,123 @@
   }
 
   nav ul a:hover { opacity: 1; color: var(--amber); }
+
+  /* ─── Mobile menu — topo ring trigger ─── */
+
+  .menu-btn {
+    display: none;
+    width: 36px;
+    height: 36px;
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    padding: 0;
+    outline: none;
+  }
+
+  /* Concentric rings — styled like the hero topo decoration */
+  .menu-btn .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1.5px solid var(--amber);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .menu-btn .ring-1 { width: 36px; height: 36px; opacity: 0.9; }
+  .menu-btn .ring-2 { width: 26px; height: 26px; opacity: 0.6; }
+  .menu-btn .ring-3 { width: 16px; height: 16px; opacity: 0.35; background: var(--amber); border-color: var(--amber); }
+
+  /* Dot at centre */
+  .menu-btn .ring-dot {
+    position: absolute;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--amber);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* When open — outer ring pulses outward, inner fills */
+  .menu-open .menu-btn .ring-1 { transform: translate(-50%, -50%) scale(1.15); opacity: 0.5; }
+  .menu-open .menu-btn .ring-2 { opacity: 0.9; }
+  .menu-open .menu-btn .ring-3 { background: transparent; opacity: 0.7; }
+
+  /* Full-screen mobile menu drawer */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 98;
+    background: rgba(26, 18, 8, 0.97);
+    backdrop-filter: blur(12px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .mobile-menu.open {
+    display: flex;
+    pointer-events: all;
+    opacity: 1;
+  }
+
+  /* Topo decorative rings in the menu background */
+  .mobile-menu::before {
+    content: '';
+    position: absolute;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 131, 42, 0.1);
+    box-shadow:
+      0 0 0 40px  rgba(212, 131, 42, 0.06),
+      0 0 0 80px  rgba(212, 131, 42, 0.04),
+      0 0 0 130px rgba(212, 131, 42, 0.025),
+      0 0 0 190px rgba(212, 131, 42, 0.012);
+    pointer-events: none;
+  }
+
+  .mobile-menu ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .mobile-menu ul li a {
+    display: block;
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 8vw, 2.6rem);
+    font-weight: 700;
+    color: var(--fog);
+    text-decoration: none;
+    padding: 0.5rem 2rem;
+    letter-spacing: -0.01em;
+    transition: color 0.2s;
+    text-align: center;
+  }
+
+  .mobile-menu ul li a:hover,
+  .mobile-menu ul li a:active { color: var(--amber); }
+
+  .mobile-menu .menu-close-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(232, 213, 163, 0.35);
+  }
 
   /* ─── Hero ─── */
   .hero {
@@ -243,6 +363,7 @@
     margin-bottom: 1.5rem;
     opacity: 0;
     animation: fadeUp 0.8s 0.2s forwards;
+    max-width: unset;
   }
 
   .hero h1 {
@@ -329,14 +450,18 @@
 
   .hero-cta-ghost {
     background: transparent;
-    color: var(--straw);
-    border-color: rgba(232, 213, 163, 0.3);
+    color: var(--fog);
+    border-color: var(--amber);
   }
 
   .hero-cta-ghost:hover {
-    background: rgba(232, 213, 163, 0.1);
-    color: var(--straw);
-    border-color: rgba(232, 213, 163, 0.6);
+    background: var(--amber);
+    color: var(--ink);
+    border-color: var(--amber);
+  }
+
+  .hero-cta-ghost:visited:not(:hover) {
+    color: var(--amber);
   }
 
   .hero-cta svg { width: 14px; height: 14px; }
@@ -1133,12 +1258,131 @@
 
   .map-footer-strip a:hover { opacity: 1; }
 
+  /* ─── External link icon ─── */
+  a[target="_blank"]:not(.hero-cta):not(.hero-cta-ghost):not(nav ul a):not(footer a) {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.25em;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: currentColor;
+    white-space: nowrap;
+  }
+
+  a[target="_blank"]:not(.hero-cta):not(.hero-cta-ghost):not(nav ul a):not(footer a)::after {
+    content: '';
+    display: inline-block;
+    width: 0.7em;
+    height: 0.7em;
+    flex-shrink: 0;
+    background-color: currentColor;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3.5 1H1a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V8.5M7 1h4m0 0v4m0-4L5 7' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3.5 1H1a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V8.5M7 1h4m0 0v4m0-4L5 7' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    margin-bottom: -0.05em;
+    opacity: 0.75;
+  }
+
+  /* Footer links get a subtle icon too */
+  footer a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.2em;
+  }
+  footer a::after {
+    content: '↗';
+    font-size: 0.75em;
+    opacity: 0.5;
+  }
+
+  /* Camp tag links */
+  a.camp-tag-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* ─── Global Link Styling ─── */
+
+  /* Base — light-background sections (cream, fog) */
+  a {
+    color: var(--rust);
+    text-decoration-color: rgba(181, 82, 26, 0.35);
+    text-underline-offset: 3px;
+    transition: color 0.2s, text-decoration-color 0.2s;
+  }
+  a:hover {
+    color: var(--amber);
+    text-decoration-color: rgba(212, 131, 42, 0.6);
+  }
+  a:visited { color: var(--bark); }
+
+  /* Dark-background sections — checklist, map footer strip, footer */
+  .checklist-section a,
+  .route-map a,
+  footer a {
+    color: var(--amber);
+    text-decoration-color: rgba(212, 131, 42, 0.35);
+  }
+  .checklist-section a:visited,
+  .route-map a:visited,
+  footer a:visited { color: rgba(212, 131, 42, 0.75); }
+  .checklist-section a:hover,
+  .route-map a:hover,
+  footer a:hover {
+    color: var(--straw);
+    text-decoration-color: rgba(232, 213, 163, 0.6);
+  }
+
+  /* Status banner — dark yellow bg, dark ink text */
+  .status-banner a:visited { color: rgba(26, 18, 8, 0.65); }
+
+  /* Dark bark sections — camping */
+  .camping a { color: var(--rust); }
+  .camping a:hover { color: var(--amber); }
+  .camping a:visited { color: var(--bark); }
+
+  /* Nav links — override base, keep existing style */
+  nav a, nav a:visited {
+    color: var(--straw);
+    text-decoration: none;
+  }
+  nav ul a:hover { color: var(--amber); }
+
+  /* Hero CTAs — not underlined */
+  .hero-cta, .hero-cta:visited, .hero-cta:hover {
+    text-decoration: none;
+  }
+
+  /* Contact cells — monospace links */
+  .contact-cell a {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--rust);
+    text-decoration-color: rgba(181, 82, 26, 0.3);
+  }
+  .contact-cell a:hover { color: var(--amber); }
+
+  /* Alert / winhall boxes */
+  .alert-box a, .winhall-status-box a {
+    color: var(--bark);
+    font-weight: 700;
+    text-decoration-color: rgba(74, 55, 40, 0.4);
+  }
+  .alert-box a:hover, .winhall-status-box a:hover { color: var(--rust); }
+
   /* ─── Responsive ─── */
   @media (max-width: 768px) {
 
-    /* Nav */
+    /* Nav — show ring button, hide desktop links */
     nav ul { display: none; }
     nav { padding: 0 1.25rem; }
+    .menu-btn { display: flex; }
+
+    /* Map embed — taller on mobile so map+elevation both show */
+    .rwgps-wrap { padding-bottom: 100%; }
 
     /* Status banner — tighter text wrap */
     .status-banner {
@@ -1275,6 +1519,20 @@
 </head>
 <body>
 
+<!-- Mobile fullscreen menu drawer -->
+<div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+  <ul>
+    <li><a href="#route"     class="menu-link">Route</a></li>
+    <li><a href="#brief"     class="menu-link">Brief</a></li>
+    <li><a href="#itinerary" class="menu-link">Itinerary</a></li>
+    <li><a href="#camping"   class="menu-link">Camps</a></li>
+    <li><a href="#resupply"  class="menu-link">Resupply</a></li>
+    <li><a href="#gear"      class="menu-link">Gear</a></li>
+    <li><a href="#checklist" class="menu-link">Checklist</a></li>
+  </ul>
+  <span class="menu-close-hint">Tap any link to navigate</span>
+</div>
+
 <!-- At-Risk Status Banner -->
 <div class="status-banner">
   <div class="pulse"></div>
@@ -1286,13 +1544,20 @@
   <span class="wordmark">RB 2026</span>
   <ul>
     <li><a href="#route">Route</a></li>
-    <li><a href="#map">Map</a></li>
+    <li><a href="#brief">Brief</a></li>
     <li><a href="#itinerary">Itinerary</a></li>
     <li><a href="#camping">Camps</a></li>
     <li><a href="#resupply">Resupply</a></li>
     <li><a href="#gear">Gear</a></li>
     <li><a href="#checklist">Checklist</a></li>
   </ul>
+  <!-- Topo-ring mobile menu trigger -->
+  <button class="menu-btn" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false" onclick="toggleMenu()">
+    <span class="ring ring-1"></span>
+    <span class="ring ring-2"></span>
+    <span class="ring ring-3"></span>
+    <span class="ring-dot"></span>
+  </button>
 </nav>
 
 <!-- Hero -->
@@ -1340,7 +1605,7 @@
 </section>
 
 <!-- Route Map Embed -->
-<section class="route-map" id="map">
+<section class="route-map" id="route">
   <div class="map-header">
     <div class="map-header-left">
       <p class="section-label" style="color:var(--amber);">// Live Route Map</p>
@@ -1381,13 +1646,13 @@
 </section>
 
 <!-- Route Overview -->
-<section class="route-overview" id="route">
+<section class="route-overview" id="brief">
   <p class="section-label reveal">Route Brief</p>
   <h2 class="reveal">137 Miles of <em>Quintessential Vermont</em></h2>
 
   <div class="route-grid">
     <div class="route-left reveal">
-      <p>A 137-mile hardtail loop starting and ending in Brattleboro, VT. Designed by Joe Cruz for bikepacking.com — this v2.1 variant threads through the Green Mountain National Forest, behind Stratton Mountain on the legendary IP Road, and through some of Vermont's most beautiful hill villages.</p>
+      <p>A 137-mile hardtail loop starting and ending in Brattleboro, VT. Designed by Joe Cruz for <a href="https://bikepacking.com/routes/roundabout-brattleboro/" target="_blank" rel="noopener">bikepacking.com</a> — this v2.1 variant threads through the Green Mountain National Forest, behind Stratton Mountain on the legendary IP Road, and through some of Vermont's most beautiful hill villages.</p>
 
       <p>The character changes as you ride: the first day rolls through open valley farmland; the middle two days dig into remote forest doubletrack and rocky pitches; the final day brings you back through pastoral hill country and the village of Grafton.</p>
 
@@ -1407,7 +1672,7 @@
 
       <div class="winhall-status-box">
         <strong>⚠ Night 2 Status: Winhall Brook — At Risk</strong>
-        <p>Winhall Brook Campground has been closed since the July 2023 Vermont floods. There is a possibility it reopens before our trip — we'll make the call the morning of departure. <strong>Hapgood Pond is fully booked as the confirmed backup.</strong> Riders should be prepared for either option. Check bikepacking.com/routes/roundabout-brattleboro for current alerts.</p>
+        <p>Winhall Brook Campground has been closed since the July 2023 Vermont floods. There is a possibility it reopens before our trip — we'll make the call the morning of departure. <strong>Hapgood Pond is fully booked as the confirmed backup.</strong> Riders should be prepared for either option. Check <a href="https://bikepacking.com/routes/roundabout-brattleboro/" target="_blank" rel="noopener">bikepacking.com/routes/roundabout-brattleboro</a> for current alerts.</p>
       </div>
     </div>
 
@@ -1618,7 +1883,7 @@
       <div class="camp-night">Night 2 — Confirmed Backup</div>
       <h3>Hapgood Pond Campground, Peru VT</h3>
       <p>A legitimate USFS campground in the Green Mountain National Forest near Peru, VT. Pit toilets, fire rings, and a swimming pond. 8 miles further than Winhall Brook but a genuinely excellent campground.</p>
-      <p>Already reserved on <strong>recreation.gov</strong>. If Winhall is closed, this is where we sleep — no scramble, no stress.</p>
+      <p>Already reserved on <strong><a href="https://www.recreation.gov" target="_blank" rel="noopener">recreation.gov</a></strong>. If Winhall is closed, this is where we sleep — no scramble, no stress.</p>
       <div class="camp-detail">
         <span class="camp-tag">USFS Campground</span>
         <span class="camp-tag" style="background:rgba(74,103,65,0.15); color:var(--moss);">✓ Reserved</span>
@@ -1651,7 +1916,7 @@
         <span class="camp-tag">Bed &amp; Breakfast</span>
         <span class="camp-tag">Pub On-Site</span>
         <span class="camp-tag action">⚑ Book in Advance</span>
-        <span class="camp-tag">graftoninnvermont.com</span>
+        <span class="camp-tag"><a href="https://www.graftoninnvermont.com" target="_blank" rel="noopener" class="camp-tag-link">graftoninnvermont.com</a></span>
       </div>
     </div>
 
@@ -1843,8 +2108,8 @@
     <div class="checklist-col">
       <h3>Do Now</h3>
       <ul class="check-items" id="list-now">
-        <li><div class="check-box" onclick="toggleCheck(this)"></div>Hapgood Pond reserved on recreation.gov (confirmed backup — Night 2)</li>
-        <li><div class="check-box" onclick="toggleCheck(this)"></div>Monitor Winhall Brook status — check recreation.gov + bikepacking.com alerts</li>
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Hapgood Pond reserved on <a href="https://www.recreation.gov" target="_blank" rel="noopener">recreation.gov</a> (confirmed backup — Night 2)</li>
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Monitor Winhall Brook status — check <a href="https://www.recreation.gov" target="_blank" rel="noopener">recreation.gov</a> + <a href="https://bikepacking.com/routes/roundabout-brattleboro/" target="_blank" rel="noopener">bikepacking.com</a> alerts</li>
         <li><div class="check-box" onclick="toggleCheck(this)"></div>Book Grafton Inn if choosing Night 3 Option B</li>
         <li><div class="check-box" onclick="toggleCheck(this)"></div>Confirm group size — under 11 for no Mollie Beattie permit</li>
         <li><div class="check-box" onclick="toggleCheck(this)"></div>Share RideWithGPS route link with all riders</li>
@@ -1856,7 +2121,7 @@
       <h3>A Few Weeks Out</h3>
       <ul class="check-items" id="list-weeks">
         <li><div class="check-box" onclick="toggleCheck(this)"></div>Call Mollie Beattie district office: (802) 289-0603 — confirm access and fire rules</li>
-        <li><div class="check-box" onclick="toggleCheck(this)"></div>Check bikepacking.com route alerts for current flood/trail closures</li>
+        <li><div class="check-box" onclick="toggleCheck(this)"></div>Check <a href="https://bikepacking.com/routes/roundabout-brattleboro/" target="_blank" rel="noopener">bikepacking.com</a> route alerts for current flood/trail closures</li>
         <li><div class="check-box" onclick="toggleCheck(this)"></div>Service bikes: drivetrain, brakes, tubeless top-up</li>
         <li><div class="check-box" onclick="toggleCheck(this)"></div>Stock spare derailleur hangers for each rider's bike</li>
         <li><div class="check-box" onclick="toggleCheck(this)"></div>Test sleep system — is your bag actually warm enough?</li>
@@ -1908,7 +2173,7 @@
     <div class="contact-cell">
       <div class="contact-type">Night 2 Campground</div>
       <div class="contact-name">Hapgood Pond Campground</div>
-      <div class="contact-info">recreation.gov</div>
+      <div class="contact-info"><a href="https://www.recreation.gov" target="_blank" rel="noopener">recreation.gov</a></div>
       <p>Reservations essential for summer weekends. Book well in advance.</p>
     </div>
     <div class="contact-cell">
@@ -1919,8 +2184,8 @@
     </div>
     <div class="contact-cell">
       <div class="contact-type">Route Source</div>
-      <div class="contact-name">bikepacking.com</div>
-      <div class="contact-info">bikepacking.com/routes/roundabout-brattleboro</div>
+      <div class="contact-name"><a href="https://bikepacking.com/routes/roundabout-brattleboro/" target="_blank" rel="noopener">bikepacking.com</a></div>
+      <div class="contact-info"><a href="https://bikepacking.com/routes/roundabout-brattleboro/" target="_blank" rel="noopener">bikepacking.com/routes/roundabout-brattleboro</a></div>
       <p>Check for current route alerts and community updates before departure.</p>
     </div>
   </div>
@@ -1938,6 +2203,38 @@
 </footer>
 
 <script>
+  // ── Mobile menu ──
+  const menuBtn  = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  function toggleMenu() {
+    const isOpen = mobileMenu.classList.toggle('open');
+    menuBtn.classList.toggle('menu-open', isOpen);
+    menuBtn.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+
+  function closeMenu() {
+    mobileMenu.classList.remove('open');
+    menuBtn && menuBtn.classList.remove('menu-open');
+    menuBtn && menuBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  // Close on nav link tap
+  document.querySelectorAll('.menu-link').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close on backdrop click (clicking outside the ul)
+  mobileMenu.addEventListener('click', function(e) {
+    if (e.target === mobileMenu) closeMenu();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeMenu();
+  });
   // Toggle day cards
   function toggleDay(card) {
     const wasOpen = card.classList.contains('open');
